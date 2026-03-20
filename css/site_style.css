@@ -15,7 +15,6 @@ body {
     padding: 20px;
 }
 
-/* ---------- Navigation ---------- */
 .site-nav {
     background-color: #C9F2FF;
     margin-bottom: 30px;
@@ -25,17 +24,19 @@ body {
 .site-nav .nav-content {
     display: flex;
     align-items: center;
-    /* vertical center for text and logo */
-    gap: 15px;
+    /* vertically center everything */
+    gap: 10px;
     /* spacing between items */
 }
 
 .site-nav .nav-content a {
-    position: relative;
+    display: flex;
+    align-items: center;
+    /* center text or image inside link */
     color: #33337C;
     text-decoration: none;
     font-size: 16px;
-    padding: 0 10px;
+    padding: 0 5px;
     transition: color 0.2s ease-in-out;
 }
 
@@ -44,45 +45,38 @@ body {
     color: #33337C;
 }
 
-/* Vertical separator for all links except last one */
-.site-nav .nav-content a:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 25%;
-    /* vertical alignment of the line */
-    height: 50%;
-    /* line height: half of the parent height */
-    width: 1px;
-    background-color: #33337C;
-}
-
-/* Home logo sizing */
 .site-nav .home-link img {
     height: calc(2 * 1em);
-    /* two text lines tall */
+    /* 2 lines tall */
     object-fit: contain;
-    vertical-align: middle;
+}
+
+/* Separator style */
+.site-nav .separator {
+    display: inline-block;
+    width: 1px;
+    background-color: #33337C;
+    height: 60%;
+    /* line height relative to nav height */
+    align-self: center;
+    /* vertical centering */
 }
 
 /* ---------- Responsive Navigation ---------- */
 @media (max-width: 700px) {
-    .site-nav {
-        display: flex;
+    .site-nav .nav-content {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
-        padding: 10px 0;
     }
 
-    .site-nav .nav-content a::after {
+    .site-nav .separator {
         display: none;
-        /* remove vertical lines on mobile */
+        /* hide vertical lines on mobile */
     }
 
     .site-nav .nav-content a {
-        padding: 0;
-        /* remove horizontal padding for stacked layout */
+        padding: 5px 0;
+        /* spacing for stacked layout */
     }
 }
 

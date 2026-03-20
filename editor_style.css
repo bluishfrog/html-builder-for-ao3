@@ -1,3 +1,22 @@
+/* BODY & LAYOUT */
+
+body {
+  display: flex;
+  /* side-by-side panels */
+  gap: 20px;
+  /* spacing between editor and preview */
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* PANELS */
+
+.panel {
+  box-sizing: border-box;
+}
+
+/* Editor panel only */
 .panel:not(.preview) {
   width: 50%;
 }
@@ -6,6 +25,9 @@
 .panel:not(.preview) input {
   width: 100%;
   margin-bottom: 10px;
+  padding: 6px 8px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 .panel:not(.preview) .stats-row {
@@ -20,18 +42,27 @@
 .panel:not(.preview) button {
   padding: 8px 12px;
   margin-top: 5px;
+  cursor: pointer;
 }
 
-.panel.preview {
-  border: 1px solid #ccc;
-  padding: 10px;
-  max-height: 90vh;
-  overflow: auto;
-  background: #f5f5f5;
-}
-
+/* Replies inside editor */
 .panel:not(.preview) .reply {
   border: 1px solid #ddd;
   padding: 10px;
   margin-top: 10px;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+/* =========================
+   PREVIEW PANEL
+   ========================= */
+.panel.preview {
+  width: 50%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
 }

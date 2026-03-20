@@ -18,16 +18,18 @@
 
 <body>
 
-    <nav>
+    <!-- Navigation -->
+    <nav style="margin-bottom: 20px;">
         <a href="index.html">Home</a> |
         <a href="document_builder.html">Document Builder</a> |
         <a href="account_database.html">Account Database</a>
     </nav>
 
-    <div style="display: flex; gap: 20px;">
+    <!-- Main container -->
+    <div style="display: flex; gap: 20px; align-items: flex-start;">
 
         <!-- LEFT: EDITOR -->
-        <div class="panel">
+        <div class="panel" style="flex:1;">
             <h2>Editor</h2>
 
             <h3>Select Account</h3>
@@ -69,16 +71,134 @@
         </div>
 
         <!-- RIGHT: AO3 PREVIEW -->
-        <div class="panel preview">
+        <div class="panel preview" style="flex:1; display:block;">
             <div id="workskin">
                 <div id="preview"></div>
             </div>
         </div>
+
     </div>
 
     <!-- Scripts -->
-    <script src="js/accounts.js"></script>
-    <script src="js/builder.js"></script>
+    <script>
+        let replies = [];
+
+        function addReply() {
+            const id = Date.now();
+            replies.push({ id, name: '', handle: '', icon: '', content: '' });
+            renderReplies();
+        }
+
+        function renderReplies() {
+            const container = document.getElementById('replies');
+            container.innerHTML = '';
+
+            replies.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'reply';
+                div.innerHTML = `
+      <input placeholder="Name" oninput="updateReply(${r.id}, 'name', this.value)">
+      <input placeholder="Handle" oninput="updateReply(${r.id}, 'handle', this.value)">
+      <input placeholder="Icon URL" oninput="updateReply(${r.id}, 'icon', this.value)">
+      <textarea placeholder="Reply" oninput="updateReply(${r.id}, 'content', this.value)"></textarea>
+      <button onclick="deleteReply(${r.id})">Delete</button>
+    `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateReply(id, field, value) {
+            const r = replies.find(x => x.id === id);
+            r[field] = value;
+            update();
+        }
+
+        function deleteReply(id) {
+            replies = replies.filter(r => r.id !== id);
+            renderReplies();
+            update();
+        }
+
+        function formatHashtags(text) {
+            if (!text) return '';
+            return text.split(' ').map(tag => `<span class="twt-hl">${tag}</span>`).join(' ');
+        }
+
+        function generateHTML() {
+            const name = document.getElementById('name').value;
+            const handle = document.getElementById('handle').value;
+            const icon = document.getElementById('icon').value;
+            const content = document.getElementById('content').value;
+            const hashtags = formatHashtags(document.getElementById('hashtags').value);
+            const timestamp = document.getElementById('timestamp').value;
+            const retweets = document.getElementById('retweets').value || 0;
+            const quotes = document.getElementById('quotes').value || 0;
+            const likes = document.getElementById('likes').value || 0;
+
+            let html = `<div class="twt">
+<div class="twt-header">
+  <div class="twt-icon-container">
+    <p><img class="twt-icon" src="${icon}"></p>
+  </div>
+  <div class="twt-id">
+    <p><span class="twt-name">${name}</span><br>
+    <span class="twt-handle">${handle}</span></p>
+  </div>
+</div>
+
+<div class="twt-content">
+  <p>${content}</p>
+</div>
+
+<p>${hashtags}</p>
+
+<div class="twt-timestamp">
+  <p>${timestamp}</p>
+</div>
+
+<hr class="twt-sep">
+
+<div class="twt-stat1">
+  <p><strong>${retweets}</strong> Retweets <strong>${quotes}</strong> Quote Tweets <strong>${likes}</strong> Likes</p>
+</div>`;
+
+            replies.forEach(r => {
+                html += `
+<hr class="twt-sep-reply">
+<div class="twt-replybox">
+  <div class="twt-icon-replycontainer">
+    <p><img class="twt-icon" src="${r.icon}"></p>
+  </div>
+  <div class="twt-replycontainer">
+    <p><span class="twt-name">${r.name}</span> <span class="twt-handle">${r.handle}</span></p>
+    <div class="twt-replycontent">
+      <p>${r.content}</p>
+    </div>
+  </div>
+</div>`;
+            });
+
+            html += `</div>`;
+            return html;
+        }
+
+        function update() {
+            const html = generateHTML();
+            document.getElementById('output').value = html;
+            document.getElementById('preview').innerHTML = html;
+        }
+
+        function copyHTML() {
+            const textarea = document.getElementById('output');
+            textarea.select();
+            document.execCommand('copy');
+        }
+
+        // Attach input listeners
+        ['name', 'handle', 'icon', 'content', 'hashtags', 'timestamp', 'retweets', 'quotes', 'likes']
+            .forEach(id => document.getElementById(id).addEventListener('input', update));
+
+    </script>
 
 </body>
 

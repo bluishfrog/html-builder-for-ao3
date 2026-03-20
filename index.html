@@ -9,8 +9,34 @@ body { font-family: sans-serif; display: flex; gap: 20px; padding: 20px; }
 .panel { width: 50%; }
 textarea, input { width: 100%; margin-bottom: 10px; }
 button { padding: 8px 12px; margin-top: 5px; }
-.preview { border: 1px solid #ccc; padding: 10px; max-height: 90vh; overflow: auto; }
+.preview { border: 1px solid #ccc; padding: 10px; max-height: 90vh; overflow: auto; background: #f5f5f5; }
 .reply { border: 1px solid #ddd; padding: 10px; margin-top: 10px; }
+
+/* ===== FULL AO3 WORKSKIN CSS (shortened but accurate core) ===== */
+#workskin .twt {
+  max-width: 450px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #c7c7c7;
+  border-radius: 10px;
+  font-family: system-ui, sans-serif;
+  background: white;
+}
+#workskin .twt-header { overflow: hidden; margin-bottom: -2em; }
+#workskin .twt-icon-container { float: left; }
+#workskin .twt-icon { border-radius: 50%; width: 3.5em; }
+#workskin .twt-id { padding-left: 1em; overflow: hidden; }
+#workskin .twt-name { font-weight: bold; }
+#workskin .twt-handle { color: #657786; }
+#workskin .twt-content { font-size: 1.3em; margin-top: 10px; }
+#workskin .twt-timestamp { color: #657786; }
+#workskin hr { border: none; height: 1px; background: #e6e6e6; }
+#workskin .twt-stat1 { color: #657786; font-size: 0.9em; }
+#workskin .twt-replybox { margin-top: 10px; display: flex; }
+#workskin .twt-icon-replycontainer { margin-right: 10px; }
+#workskin .twt-replycontainer { flex: 1; }
+#workskin .twt-replycontent { margin-top: 5px; }
+#workskin .twt-hl { color: #1DA1F2; }
 </style>
 </head>
 <body>
@@ -18,12 +44,10 @@ button { padding: 8px 12px; margin-top: 5px; }
 <div class="panel">
 <h2>Editor</h2>
 
-<h3>Author</h3>
+<h3>Main Tweet</h3>
 <input id="name" placeholder="Name">
 <input id="handle" placeholder="@handle">
 <input id="icon" placeholder="Icon URL">
-
-<h3>Tweet</h3>
 <textarea id="content" placeholder="Tweet content"></textarea>
 <input id="hashtags" placeholder="#tags separated by space">
 <input id="timestamp" placeholder="Timestamp">
@@ -37,19 +61,22 @@ button { padding: 8px 12px; margin-top: 5px; }
 <div id="replies"></div>
 <button onclick="addReply()">+ Add Reply</button>
 
-<br><br>
 <button onclick="copyHTML()">Copy HTML</button>
-<textarea id="output" rows="10" placeholder="Generated HTML"></textarea>
+<textarea id="output" rows="10"></textarea>
 </div>
 
-<div class="panel preview" id="preview"></div>
+<div class="panel preview">
+  <div id="workskin">
+    <div id="preview"></div>
+  </div>
+</div>
 
 <script>
 let replies = [];
 
 function addReply() {
   const id = Date.now();
-  replies.push({ id, name: '', handle: '', content: '' });
+  replies.push({ id, name: '', handle: '', icon: '', content: '' });
   renderReplies();
 }
 
@@ -63,6 +90,7 @@ function renderReplies() {
     div.innerHTML = `
       <input placeholder="Name" oninput="updateReply(${r.id}, 'name', this.value)">
       <input placeholder="Handle" oninput="updateReply(${r.id}, 'handle', this.value)">
+      <input placeholder="Icon URL" oninput="updateReply(${r.id}, 'icon', this.value)">
       <textarea placeholder="Reply" oninput="updateReply(${r.id}, 'content', this.value)"></textarea>
       <button onclick="deleteReply(${r.id})">Delete</button>
     `;
@@ -82,41 +110,68 @@ function deleteReply(id) {
   update();
 }
 
+function formatHashtags(text) {
+  return text.split(' ').map(tag => `<span class="twt-hl">${tag}</span>`).join(' ');
+}
+
 function generateHTML() {
   const name = document.getElementById('name').value;
   const handle = document.getElementById('handle').value;
   const icon = document.getElementById('icon').value;
   const content = document.getElementById('content').value;
-  const hashtags = document.getElementById('hashtags').value;
+  const hashtags = formatHashtags(document.getElementById('hashtags').value);
   const timestamp = document.getElementById('timestamp').value;
   const retweets = document.getElementById('retweets').value;
   const quotes = document.getElementById('quotes').value;
   const likes = document.getElementById('likes').value;
 
   let html = `<div class="twt">
-  <div class="twt-header">
-    <div class="twt-icon-container"><p><img class="twt-icon" src="${icon}"></p></div>
-    <div class="twt-id"><p><span class="twt-name">${name}</span><br><span class="twt-handle">${handle}</span></p></div>
+
+<div class="twt-header">
+  <div class="twt-icon-container">
+    <p><img class="twt-icon" src="${icon}"></p>
   </div>
-  <div class="twt-content"><p>${content}</p></div>
-  <p>${hashtags}</p>
-  <div class="twt-timestamp"><p>${timestamp}</p></div>
-  <hr class="twt-sep">
-  <div class="twt-stat1"><p><strong>${retweets}</strong> Retweets <strong>${quotes}</strong> Quote Tweets <strong>${likes}</strong> Likes</p></div>
+  <div class="twt-id">
+    <p><span class="twt-name">${name}</span><br>
+    <span class="twt-handle">${handle}</span></p>
+  </div>
+</div>
+
+<div class="twt-content">
+  <p>${content}</p>
+</div>
+
+<p>${hashtags}</p>
+
+<div class="twt-timestamp">
+  <p>${timestamp}</p>
+</div>
+
+<hr class="twt-sep">
+
+<div class="twt-stat1">
+  <p><strong>${retweets}</strong> Retweets <strong>${quotes}</strong> Quote Tweets <strong>${likes}</strong> Likes</p>
+</div>
 `;
 
   replies.forEach(r => {
     html += `
-    <hr class="twt-sep-reply">
-    <div class="twt-replybox">
-      <div class="twt-replycontainer">
-        <p><span class="twt-name">${r.name}</span> <span class="twt-handle">${r.handle}</span></p>
-        <div class="twt-replycontent"><p>${r.content}</p></div>
-      </div>
-    </div>`;
+<hr class="twt-sep-reply">
+
+<div class="twt-replybox">
+  <div class="twt-icon-replycontainer">
+    <p><img class="twt-icon" src="${r.icon}"></p>
+  </div>
+  <div class="twt-replycontainer">
+    <p><span class="twt-name">${r.name}</span> <span class="twt-handle">${r.handle}</span></p>
+    <div class="twt-replycontent">
+      <p>${r.content}</p>
+    </div>
+  </div>
+</div>`;
   });
 
-  html += '</div>';
+  html += '\n</div>';
 
   return html;
 }
@@ -133,8 +188,6 @@ function copyHTML() {
   document.execCommand('copy');
 }
 
-
-// auto update
 ['name','handle','icon','content','hashtags','timestamp','retweets','quotes','likes'].forEach(id => {
   document.getElementById(id).addEventListener('input', update);
 });

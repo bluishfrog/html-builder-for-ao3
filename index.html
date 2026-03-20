@@ -1,117 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AO3 Tweet Builder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AO3 Tweet Builder</title>
 
-<!-- External AO3 CSS -->
-<link rel="stylesheet" href="skin_2025_SocialMediaFormatting.css">
+    <!-- External AO3 CSS -->
+    <link rel="stylesheet" href="skin_2025_SocialMediaFormatting.css">
 
-<!-- Editor-only styling -->
-<link rel="stylesheet" href="editor_style.css">
+    <!-- Editor-only styling -->
+    <link rel="stylesheet" href="editor_style.css">
 
+</head>
 
-<!-- LEFT: EDITOR -->
-<div class="panel">
-<h2>Editor</h2>
+<body>
 
-<h3>Main Tweet</h3>
-<input id="name" placeholder="Name">
-<input id="handle" placeholder="@handle">
-<input id="icon" placeholder="Icon URL">
-<textarea id="content" placeholder="Tweet content"></textarea>
-<input id="hashtags" placeholder="#tags separated by space">
-<input id="timestamp" placeholder="Timestamp">
+    <!-- LEFT: EDITOR -->
+    <div class="panel">
+        <h2>Editor</h2>
 
-<h3>Stats</h3>
-<div class="stats-row">
-  <div>
-    <label>Retweets</label>
-    <input id="retweets" type="number">
-  </div>
-  <div>
-    <label>Quotes</label>
-    <input id="quotes" type="number">
-  </div>
-  <div>
-    <label>Likes</label>
-    <input id="likes" type="number">
-  </div>
-</div>
+        <h3>Main Tweet</h3>
+        <input id="name" placeholder="Name">
+        <input id="handle" placeholder="@handle">
+        <input id="icon" placeholder="Icon URL">
+        <textarea id="content" placeholder="Tweet content"></textarea>
+        <input id="hashtags" placeholder="#tags separated by space">
+        <input id="timestamp" placeholder="Timestamp">
 
-<h3>Replies</h3>
-<div id="replies"></div>
-<button onclick="addReply()">+ Add Reply</button>
+        <h3>Stats</h3>
+        <div class="stats-row">
+            <div>
+                <label>Retweets</label>
+                <input id="retweets" type="number">
+            </div>
+            <div>
+                <label>Quotes</label>
+                <input id="quotes" type="number">
+            </div>
+            <div>
+                <label>Likes</label>
+                <input id="likes" type="number">
+            </div>
+        </div>
 
-<br>
-<button onclick="copyHTML()">Copy HTML</button>
-<textarea id="output" rows="10" placeholder="Generated HTML"></textarea>
-</div>
+        <h3>Replies</h3>
+        <div id="replies"></div>
+        <button onclick="addReply()">+ Add Reply</button>
 
-<!-- RIGHT: PREVIEW (AO3 STYLED ONLY HERE) -->
-<div class="panel preview">
-  <div id="workskin">
-    <div id="preview"></div>
-  </div>
-</div>
+        <br>
+        <button onclick="copyHTML()">Copy HTML</button>
+        <textarea id="output" rows="10" placeholder="Generated HTML"></textarea>
+    </div>
 
-<script>
-let replies = [];
+    <!-- RIGHT: PREVIEW (AO3 STYLED ONLY HERE) -->
+    <div class="panel preview">
+        <div id="workskin">
+            <div id="preview"></div>
+        </div>
+    </div>
 
-function addReply() {
-  const id = Date.now();
-  replies.push({ id, name: '', handle: '', icon: '', content: '' });
-  renderReplies();
-}
+    <script>
+        let replies = [];
 
-function renderReplies() {
-  const container = document.getElementById('replies');
-  container.innerHTML = '';
+        function addReply() {
+            const id = Date.now();
+            replies.push({ id, name: '', handle: '', icon: '', content: '' });
+            renderReplies();
+        }
 
-  replies.forEach(r => {
-    const div = document.createElement('div');
-    div.className = 'reply';
-    div.innerHTML = `
+        function renderReplies() {
+            const container = document.getElementById('replies');
+            container.innerHTML = '';
+
+            replies.forEach(r => {
+                const div = document.createElement('div');
+                div.className = 'reply';
+                div.innerHTML = `
       <input placeholder="Name" oninput="updateReply(${r.id}, 'name', this.value)">
       <input placeholder="Handle" oninput="updateReply(${r.id}, 'handle', this.value)">
       <input placeholder="Icon URL" oninput="updateReply(${r.id}, 'icon', this.value)">
       <textarea placeholder="Reply" oninput="updateReply(${r.id}, 'content', this.value)"></textarea>
       <button onclick="deleteReply(${r.id})">Delete</button>
     `;
-    container.appendChild(div);
-  });
-}
+                container.appendChild(div);
+            });
+        }
 
-function updateReply(id, field, value) {
-  const r = replies.find(x => x.id === id);
-  r[field] = value;
-  update();
-}
+        function updateReply(id, field, value) {
+            const r = replies.find(x => x.id === id);
+            r[field] = value;
+            update();
+        }
 
-function deleteReply(id) {
-  replies = replies.filter(r => r.id !== id);
-  renderReplies();
-  update();
-}
+        function deleteReply(id) {
+            replies = replies.filter(r => r.id !== id);
+            renderReplies();
+            update();
+        }
 
-function formatHashtags(text) {
-  if (!text) return '';
-  return text.split(' ').map(tag => `<span class="twt-hl">${tag}</span>`).join(' ');
-}
+        function formatHashtags(text) {
+            if (!text) return '';
+            return text.split(' ').map(tag => `<span class="twt-hl">${tag}</span>`).join(' ');
+        }
 
-function generateHTML() {
-  const name = document.getElementById('name').value;
-  const handle = document.getElementById('handle').value;
-  const icon = document.getElementById('icon').value;
-  const content = document.getElementById('content').value;
-  const hashtags = formatHashtags(document.getElementById('hashtags').value);
-  const timestamp = document.getElementById('timestamp').value;
-  const retweets = document.getElementById('retweets').value;
-  const quotes = document.getElementById('quotes').value;
-  const likes = document.getElementById('likes').value;
+        function generateHTML() {
+            const name = document.getElementById('name').value;
+            const handle = document.getElementById('handle').value;
+            const icon = document.getElementById('icon').value;
+            const content = document.getElementById('content').value;
+            const hashtags = formatHashtags(document.getElementById('hashtags').value);
+            const timestamp = document.getElementById('timestamp').value;
+            const retweets = document.getElementById('retweets').value;
+            const quotes = document.getElementById('quotes').value;
+            const likes = document.getElementById('likes').value;
 
-  let html = `<div class="twt">
+            let html = `<div class="twt">
 
 <div class="twt-header">
   <div class="twt-icon-container">
@@ -140,8 +144,8 @@ function generateHTML() {
 </div>
 `;
 
-  replies.forEach(r => {
-    html += `
+            replies.forEach(r => {
+                html += `
 <hr class="twt-sep-reply">
 
 <div class="twt-replybox">
@@ -155,29 +159,30 @@ function generateHTML() {
     </div>
   </div>
 </div>`;
-  });
+            });
 
-  html += '\n</div>';
+            html += '\n</div>';
 
-  return html;
-}
+            return html;
+        }
 
-function update() {
-  const html = generateHTML();
-  document.getElementById('output').value = html;
-  document.getElementById('preview').innerHTML = html;
-}
+        function update() {
+            const html = generateHTML();
+            document.getElementById('output').value = html;
+            document.getElementById('preview').innerHTML = html;
+        }
 
-function copyHTML() {
-  const textarea = document.getElementById('output');
-  textarea.select();
-  document.execCommand('copy');
-}
+        function copyHTML() {
+            const textarea = document.getElementById('output');
+            textarea.select();
+            document.execCommand('copy');
+        }
 
-['name','handle','icon','content','hashtags','timestamp','retweets','quotes','likes'].forEach(id => {
-  document.getElementById(id).addEventListener('input', update);
-});
-</script>
+        ['name', 'handle', 'icon', 'content', 'hashtags', 'timestamp', 'retweets', 'quotes', 'likes'].forEach(id => {
+            document.getElementById(id).addEventListener('input', update);
+        });
+    </script>
 
 </body>
+
 </html>

@@ -20,13 +20,19 @@
 }
 
 #workskin .twt-icon {
-  border-radius: 50%;
   width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 #workskin .twt-iconquote {
-  border-radius: 50%;
   width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 #workskin .twt-id {

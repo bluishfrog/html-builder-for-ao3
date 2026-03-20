@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AO3 Tweet Builder</title>
+
+<!-- External AO3 CSS -->
+<link rel="stylesheet" href="skin_2025_SocialMediaFormatting.css">
+
 <style>
 body { font-family: sans-serif; display: flex; gap: 20px; padding: 20px; }
 .panel { width: 50%; }
@@ -11,36 +15,11 @@ textarea, input { width: 100%; margin-bottom: 10px; }
 button { padding: 8px 12px; margin-top: 5px; }
 .preview { border: 1px solid #ccc; padding: 10px; max-height: 90vh; overflow: auto; background: #f5f5f5; }
 .reply { border: 1px solid #ddd; padding: 10px; margin-top: 10px; }
-
-/* ===== FULL AO3 WORKSKIN CSS (shortened but accurate core) ===== */
-#workskin .twt {
-  max-width: 450px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #c7c7c7;
-  border-radius: 10px;
-  font-family: system-ui, sans-serif;
-  background: white;
-}
-#workskin .twt-header { overflow: hidden; margin-bottom: -2em; }
-#workskin .twt-icon-container { float: left; }
-#workskin .twt-icon { border-radius: 50%; width: 3.5em; }
-#workskin .twt-id { padding-left: 1em; overflow: hidden; }
-#workskin .twt-name { font-weight: bold; }
-#workskin .twt-handle { color: #657786; }
-#workskin .twt-content { font-size: 1.3em; margin-top: 10px; }
-#workskin .twt-timestamp { color: #657786; }
-#workskin hr { border: none; height: 1px; background: #e6e6e6; }
-#workskin .twt-stat1 { color: #657786; font-size: 0.9em; }
-#workskin .twt-replybox { margin-top: 10px; display: flex; }
-#workskin .twt-icon-replycontainer { margin-right: 10px; }
-#workskin .twt-replycontainer { flex: 1; }
-#workskin .twt-replycontent { margin-top: 5px; }
-#workskin .twt-hl { color: #1DA1F2; }
 </style>
 </head>
 <body>
 
+<!-- LEFT: EDITOR -->
 <div class="panel">
 <h2>Editor</h2>
 
@@ -61,10 +40,12 @@ button { padding: 8px 12px; margin-top: 5px; }
 <div id="replies"></div>
 <button onclick="addReply()">+ Add Reply</button>
 
+<br>
 <button onclick="copyHTML()">Copy HTML</button>
-<textarea id="output" rows="10"></textarea>
+<textarea id="output" rows="10" placeholder="Generated HTML"></textarea>
 </div>
 
+<!-- RIGHT: PREVIEW (AO3 STYLED ONLY HERE) -->
 <div class="panel preview">
   <div id="workskin">
     <div id="preview"></div>
@@ -111,6 +92,7 @@ function deleteReply(id) {
 }
 
 function formatHashtags(text) {
+  if (!text) return '';
   return text.split(' ').map(tag => `<span class="twt-hl">${tag}</span>`).join(' ');
 }
 

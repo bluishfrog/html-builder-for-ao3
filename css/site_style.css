@@ -32,6 +32,59 @@ nav a:hover {
     color: #0d8ddb;
 }
 
+
+/* ---------- Footer ---------- */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    background-color: #fdfdfd;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    margin-top: 40px;
+}
+
+.site-footer a {
+    color: #1DA1F2;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.2s ease-in-out;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+    color: #0d8ddb;
+}
+
+.footer-left p {
+    margin: 0;
+    line-height: 1.4em;
+}
+
+.footer-right img {
+    height: calc(2 * 1.4em);
+    /* same as 2 lines of text */
+    object-fit: contain;
+}
+
+/* ---------- Responsive Footer ---------- */
+@media (max-width: 700px) {
+    .site-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .footer-right img {
+        height: 2.8em;
+        /* make it smaller on mobile to fit nicely */
+    }
+}
+
+
 /* ---------- Panels ---------- */
 .panel {
     background-color: #fff;

@@ -91,11 +91,6 @@ body {
     text-decoration: none;
 }
 
-.dropdown-toggle::after {
-    content: ' ▾';
-    font-size: 12px;
-}
-
 /* Dropdown menu */
 .nav-dropdown .dropdown-menu {
     display: none;

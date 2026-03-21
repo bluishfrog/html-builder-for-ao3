@@ -19,23 +19,41 @@ loadComponent("footer-placeholder", "components/footer.html");
 loadComponent("head-placeholder", "components/head.html");
 
 
-// ---------- Navigation Dropdown Logic ----------
 function initNavDropdowns() {
-    // Desktop: hover handled by CSS, mobile: toggle click
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+
     document.querySelectorAll('.dropdown-toggle').forEach(btn => {
+        let tappedOnce = false;
+
         btn.addEventListener('click', e => {
-            e.preventDefault();
             const menu = btn.nextElementSibling;
             if (!menu) return;
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+
+            // Desktop → allow normal navigation
+            if (!isMobile) return;
+
+            // Mobile behavior
+            if (!tappedOnce) {
+                e.preventDefault(); // stop navigation on first tap
+                menu.style.display = 'block';
+                tappedOnce = true;
+            } else {
+                // second tap → allow navigation
+                tappedOnce = false;
+            }
         });
     });
 
-    // Optional: close dropdown if clicking outside (nice UX)
+    // Close dropdown when clicking outside
     document.addEventListener('click', e => {
         document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            if (!menu.contains(e.target) && !menu.previousElementSibling.contains(e.target)) {
+            const toggle = menu.previousElementSibling;
+
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
                 menu.style.display = 'none';
+
+                // reset tap state
+                toggle._tappedOnce = false;
             }
         });
     });

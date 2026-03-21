@@ -4,20 +4,36 @@ let accountDBs = {
     tumblr: []
 };
 
-// ---------------- Twitter Accounts ----------------
-function addTwitterAccount(name, handle, icon) {
-    if (!name || !handle || !icon) return alert("All fields must be filled!");
-    if (accountDBs.twitter.find(acc => acc.handle === handle)) return alert("Handle must be unique!");
+// ---------------- Helpers ----------------
+function isDBActive(platform) {
+    return window.dbState && window.dbState[platform];
+}
 
-    accountDBs.twitter.push({ name, handle, icon });
+// ---------------- Twitter ----------------
+function addTwitterAccount(handle, name, icon) {
+    if (!isDBActive("twitter")) {
+        alert("No Twitter DB selected!");
+        return;
+    }
 
-    // Update localStorage for download
+    if (!handle || !name || !icon) {
+        alert("All fields must be filled!");
+        return;
+    }
+
+    if (accountDBs.twitter.find(acc => acc.handle === handle)) {
+        alert("Handle must be unique!");
+        return;
+    }
+
+    accountDBs.twitter.push({ handle, name, icon });
     saveTwitterDBToLocalStorage();
 }
 
 function editTwitterAccount(handle, newName, newIcon) {
     const acc = accountDBs.twitter.find(acc => acc.handle === handle);
-    if (!acc) return alert("Account not found!");
+    if (!acc) return;
+
     acc.name = newName || acc.name;
     acc.icon = newIcon || acc.icon;
 
@@ -34,20 +50,31 @@ function saveTwitterDBToLocalStorage() {
     localStorage.setItem("twitterDB", htmlContent);
 }
 
-// ---------------- Tumblr Accounts ----------------
+// ---------------- Tumblr ----------------
 function addTumblrAccount(url, name, icon) {
-    if (!url || !icon) return alert("URL and icon must be filled!");
-    if (accountDBs.tumblr.find(acc => acc.url === url)) return alert("URL must be unique!");
+    if (!isDBActive("tumblr")) {
+        alert("No Tumblr DB selected!");
+        return;
+    }
+
+    if (!url || !icon) {
+        alert("URL and icon must be filled!");
+        return;
+    }
+
+    if (accountDBs.tumblr.find(acc => acc.url === url)) {
+        alert("URL must be unique!");
+        return;
+    }
 
     accountDBs.tumblr.push({ url, name, icon });
-
-    // Update localStorage for download
     saveTumblrDBToLocalStorage();
 }
 
 function editTumblrAccount(url, newName, newIcon) {
     const acc = accountDBs.tumblr.find(acc => acc.url === url);
-    if (!acc) return alert("Account not found!");
+    if (!acc) return;
+
     acc.name = newName || acc.name;
     acc.icon = newIcon || acc.icon;
 
@@ -64,21 +91,23 @@ function saveTumblrDBToLocalStorage() {
     localStorage.setItem("tumblrDB", htmlContent);
 }
 
-// ---------------- Utility: Generate HTML from account list ----------------
+// ---------------- HTML Generation ----------------
 function generateHTMLFromAccounts(platform, accounts) {
     let html = `<!-- ${platform} accounts database -->\n<html><body>\n<ul>\n`;
+
     accounts.forEach(acc => {
         if (platform === "twitter") {
             html += `<li data-handle="${acc.handle}" data-name="${acc.name}" data-icon="${acc.icon}"></li>\n`;
-        } else if (platform === "tumblr") {
+        } else {
             html += `<li data-url="${acc.url}" data-name="${acc.name || ""}" data-icon="${acc.icon}"></li>\n`;
         }
     });
+
     html += "</ul>\n</body></html>";
     return html;
 }
 
-// ---------------- Optional: Load DB from localStorage ----------------
+// ---------------- Load from LocalStorage ----------------
 function loadTwitterDBFromLocalStorage() {
     const content = localStorage.getItem("twitterDB");
     if (!content) return;
@@ -91,11 +120,12 @@ function loadTumblrDBFromLocalStorage() {
     accountDBs.tumblr = parseAccountsFromHTML("tumblr", content);
 }
 
-// ---------------- Utility: Parse HTML back into account objects ----------------
+// ---------------- Parse HTML ----------------
 function parseAccountsFromHTML(platform, html) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
     const lis = Array.from(doc.querySelectorAll("li"));
+
     return lis.map(li => {
         if (platform === "twitter") {
             return {
@@ -103,7 +133,7 @@ function parseAccountsFromHTML(platform, html) {
                 name: li.dataset.name,
                 icon: li.dataset.icon
             };
-        } else if (platform === "tumblr") {
+        } else {
             return {
                 url: li.dataset.url,
                 name: li.dataset.name,

@@ -1,25 +1,38 @@
+// ---------------- Global DB State ----------------
+window.dbState = {
+    main: false,
+    twitter: false,
+    tumblr: false
+};
+
 // ---------------- Main Document ----------------
 let mainFileHandle = null;
 
-// Update the preview of selected file and manage download button
+// Update preview + state + button
 function updateFilePreview(spanId, name) {
     document.getElementById(spanId).textContent = name || "No file selected";
 
-    // Enable/disable the corresponding download button
+    let isActive = !!name;
+
     switch (spanId) {
         case "mainFilePreview":
-            document.getElementById("downloadMainBtn").disabled = !name;
+            document.getElementById("downloadMainBtn").disabled = !isActive;
+            window.dbState.main = isActive;
             break;
+
         case "twitterFilePreview":
-            document.getElementById("downloadTwitterBtn").disabled = !name;
+            document.getElementById("downloadTwitterBtn").disabled = !isActive;
+            window.dbState.twitter = isActive;
             break;
+
         case "tumblrFilePreview":
-            document.getElementById("downloadTumblrBtn").disabled = !name;
+            document.getElementById("downloadTumblrBtn").disabled = !isActive;
+            window.dbState.tumblr = isActive;
             break;
     }
 }
 
-// Open existing main file
+// ---------------- Main File ----------------
 async function openMainFile() {
     try {
         [mainFileHandle] = await window.showOpenFilePicker({
@@ -33,7 +46,6 @@ async function openMainFile() {
     }
 }
 
-// Create new main file
 async function createNewMainFile() {
     try {
         mainFileHandle = await window.showSaveFilePicker({
@@ -51,7 +63,6 @@ async function createNewMainFile() {
     }
 }
 
-// Download main file (from localStorage content)
 async function downloadMainFile() {
     try {
         const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";

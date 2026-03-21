@@ -28,16 +28,15 @@
             <h1>Configuration of Your Database</h1>
             <p>
                 This is where you set up and manage the files that store your content and account info.
-                Everything stays on your computer — nothing is automatically uploaded or saved online.
-                Make sure to download your files regularly while you work, so you don’t lose any of your progress.
+                Everything stays on your computer; nothing is automatically uploaded or saved online.
+                Make sure to download your files regularly while you work, so you don’t lose any progress.
                 Think of this page as your little control center for keeping things organized.
             </p>
-
 
             <!-- Main Document Setup -->
             <h2>Main Document Setup</h2>
             <p>
-                Here’s where you choose your main document — the one that holds the core of your content.
+                Here’s where you choose your main document, the one that holds the core of your content.
                 You can either open an existing HTML file from your computer or start fresh with a new one.
                 Your files stay local, so remember to save often while you work!
             </p>
@@ -49,46 +48,36 @@
             <div class="file-actions">
                 <button onclick="openMainFile()">Open Existing File</button>
                 <button onclick="createNewMainFile()">Create New File</button>
-                <button onclick="saveMainFile()" id="saveMainBtn" disabled>Save File</button>
+                <button onclick="downloadMainFile()" id="downloadMainBtn" disabled>Download File</button>
             </div>
 
-
-            <!-- Account Database -->
             <!-- Account Database -->
             <h2>Account Database</h2>
             <p>
                 Each platform can have its own database file where account info is stored.
-                You can open an existing file, create a new one, or even use one of our pre-made test databases.
-                This helps keep your accounts neat and separate for each platform.
+                You can open an existing file, create a new one, or use one of our pre-made test databases.
+                This helps keep your accounts neat and separate for each platform. Make sure to download those too if
+                you want to keep working on this project.
             </p>
 
             <!-- Twitter Accounts -->
             <h3>Twitter Accounts</h3>
-            <p>
-                Twitter accounts need a name, handle, and icon.
-                Handles must be unique, but feel free to reuse names or icons if you want.
-                Pick a file to store your Twitter accounts, or use our test database to see how it works.
-            </p>
             <div class="file-preview" id="twitterFilePreview">No file selected</div>
             <div class="file-actions">
                 <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
                 <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
                 <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
+                <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
             </div>
 
             <!-- Tumblr Accounts -->
             <h3>Tumblr Accounts</h3>
-            <p>
-                Tumblr accounts store a URL (just a unique string, not an actual web address) and an icon.
-                You can give them a name too if you like.
-                Only one account per URL is allowed.
-                Choose a file, start a new one, or try the test database for fun.
-            </p>
             <div class="file-preview" id="tumblrFilePreview">No file selected</div>
             <div class="file-actions">
                 <button onclick="openTumblrDB()">Open Existing Tumblr DB</button>
                 <button onclick="createNewTumblrDB()">Create New Tumblr DB</button>
                 <button onclick="loadTumblrTest()">Load Tumblr Test DB</button>
+                <button onclick="downloadTumblrDB()" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
             </div>
 
             <!-- Workskin Download -->
@@ -96,8 +85,7 @@
             <p>
                 To make sure your posts look right on AO3, you need the correct workskin file.
                 You can download the version we provide here, or grab the latest version yourself and tweak it as
-                needed.
-                This doesn’t affect your content files — it just controls how things are displayed.
+                needed. This doesn’t affect your content files—it just controls how things are displayed.
             </p>
             <div class="file-actions">
                 <a href="css/skin_2026_SocialMediaFormatting.css" download>

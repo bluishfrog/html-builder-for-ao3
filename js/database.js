@@ -15,7 +15,7 @@ async function openMainFile() {
         });
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
-        document.getElementById("saveMainBtn").disabled = false;
+        document.getElementById("downloadMainBtn").disabled = false;
     } catch (err) {
         console.log("Open cancelled or failed:", err);
     }
@@ -34,22 +34,27 @@ async function createNewMainFile() {
         await writable.close();
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
-        document.getElementById("saveMainBtn").disabled = false;
+        document.getElementById("downloadMainBtn").disabled = false;
     } catch (err) {
         console.log("Creation cancelled or failed:", err);
     }
 }
 
-// Save main file
-async function saveMainFile() {
-    if (!mainFileHandle) return alert("No file selected.");
+// Download main file
+async function downloadMainFile() {
     try {
-        const writable = await mainFileHandle.createWritable();
-        const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";
-        await writable.write(content);
-        await writable.close();
+        const blob = new Blob([localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->"], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = mainFileHandle?.name || "main_document.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
     } catch (err) {
-        console.log("Save failed:", err);
+        console.log("Download failed:", err);
     }
 }
 
@@ -63,6 +68,7 @@ async function openTwitterDB() {
         });
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
+        document.getElementById("downloadTwitterBtn").disabled = false;
     } catch (err) {
         console.log(err);
     }
@@ -80,6 +86,7 @@ async function createNewTwitterDB() {
         await writable.close();
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
+        document.getElementById("downloadTwitterBtn").disabled = false;
     } catch (err) {
         console.log(err);
     }
@@ -91,8 +98,27 @@ async function loadTwitterTest() {
         const text = await res.text();
         localStorage.setItem("twitterDB", text);
         updateFilePreview("twitterFilePreview", "Test Twitter DB");
+        document.getElementById("downloadTwitterBtn").disabled = false;
     } catch (err) {
         console.log("Failed to load Twitter test DB:", err);
+    }
+}
+
+async function downloadTwitterDB() {
+    try {
+        const content = localStorage.getItem("twitterDB") || "<!-- Empty Twitter DB -->";
+        const blob = new Blob([content], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = twitterDBHandle?.name || "twitter_accounts.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (err) {
+        console.log("Download failed:", err);
     }
 }
 
@@ -106,6 +132,7 @@ async function openTumblrDB() {
         });
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
+        document.getElementById("downloadTumblrBtn").disabled = false;
     } catch (err) {
         console.log(err);
     }
@@ -123,6 +150,7 @@ async function createNewTumblrDB() {
         await writable.close();
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
+        document.getElementById("downloadTumblrBtn").disabled = false;
     } catch (err) {
         console.log(err);
     }
@@ -134,7 +162,26 @@ async function loadTumblrTest() {
         const text = await res.text();
         localStorage.setItem("tumblrDB", text);
         updateFilePreview("tumblrFilePreview", "Test Tumblr DB");
+        document.getElementById("downloadTumblrBtn").disabled = false;
     } catch (err) {
         console.log("Failed to load Tumblr test DB:", err);
+    }
+}
+
+async function downloadTumblrDB() {
+    try {
+        const content = localStorage.getItem("tumblrDB") || "<!-- Empty Tumblr DB -->";
+        const blob = new Blob([content], { type: "text/html" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = tumblrDBHandle?.name || "tumblr_accounts.html";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (err) {
+        console.log("Download failed:", err);
     }
 }

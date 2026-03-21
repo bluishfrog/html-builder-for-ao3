@@ -2,34 +2,69 @@
 <html lang="en">
 
 <head>
-    <div id="head-placeholder"></div>
-    <script src="js/loadComponents.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Management</title>
+
+    <link rel="stylesheet" href="css/site_style.css">
 </head>
 
 <body>
 
-    <div class="page-wrapper">
+<div class="page-wrapper">
 
-        <!-- NAV -->
-        <div id="nav-placeholder"></div>
+    <!-- NAV -->
+    <div id="nav-placeholder"></div>
 
+    <main class="main-content">
 
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <h1>Account Management</h1>
-            <p>Here you can add, edit, and remove accounts. Each platform will have its own section.</p>
-            <p>(Functionality not implemented yet.)</p>
-        </main>
+        <h1>Account Management</h1>
+        <p>
+            Add, edit, and organize your social media accounts here.
+            These accounts will later be used in your posts and documents.
+        </p>
 
+        <!-- ================= TWITTER ================= -->
+        <div class="card-section">
+            <h2>Twitter Accounts</h2>
 
-        <!-- FOOTER -->
-        <div id="footer-placeholder"></div>
+            <!-- Add Form -->
+            <div class="account-form">
+                <input type="text" id="tw-handle" placeholder="Handle (unique, required)">
+                <input type="text" id="tw-name" placeholder="Name (required)">
+                <input type="text" id="tw-icon" placeholder="Icon (required, link to picture)">
+                <button onclick="handleAddTwitter()">Add Account</button>
+            </div>
 
-    </div>
+            <!-- Account List -->
+            <div id="twitterList" class="account-list"></div>
+        </div>
 
-    <!-- SCRIPTS -->
-    <script src="js/loadComponents.js"></script>
+        <!-- ================= TUMBLR ================= -->
+        <div class="card-section">
+            <h2>Tumblr Accounts</h2>
+
+            <!-- Add Form -->
+            <div class="account-form">
+                <input type="text" id="tb-url" placeholder="URL (unique, required)">
+                <input type="text" id="tb-name" placeholder="Name (optional)">
+                <input type="text" id="tb-icon" placeholder="Icon (required, link to picture)">
+                <button onclick="handleAddTumblr()">Add Account</button>
+            </div>
+
+            <!-- Account List -->
+            <div id="tumblrList" class="account-list"></div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
+
+</div>
+
+<script src="js/loadComponents.js"></script>
+<script src="js/account_database.js"></script>
 
 </body>
-
 </html>

@@ -33,13 +33,26 @@
             <p>Here you can set up where your data is stored and download some files.</p>
 
             <h2>Main Document Setup</h2>
-            <p>Config where your main file is stored. Options: create new (pick where to store it), chose existing file (from local storage)</p>
+
+            <p>
+                Choose whether you want to load an existing HTML document or create a new one.
+                Your files stay local on your computer.
+            </p>
+
+            <div class="file-actions">
+                <button onclick="openFile()">Open Existing File</button>
+                <button onclick="createNewFile()">Create New File</button>
+                <button onclick="saveFile()" id="saveBtn" disabled>Save File</button>
+            </div>
 
             <h2>Account Database</h2>
-            <p>same logic as before, for twt and tumblr. also option of using test databases (but you can't edit those)</p>
+            <p>same logic as before, for twt and tumblr. also option of using test databases (but you can't edit those)
+            </p>
 
             <h2>Workskin Download</h2>
-            <p>For AO3 to be able to display the formatting correctly, you need include the correct workskin. Here's the version I use (link directly on ao3?) or you can download the newst version yourself and make adjustments as you see fit.</p>
+            <p>For AO3 to be able to display the formatting correctly, you need include the correct workskin. Here's the
+                version I use (link directly on ao3?) or you can download the newst version yourself and make
+                adjustments as you see fit.</p>
 
 
         </main>
@@ -52,6 +65,7 @@
 
     <!-- SCRIPTS -->
     <script src="js/loadComponents.js"></script>
+    <script src="js/database.js"></script>
 
 </body>
 

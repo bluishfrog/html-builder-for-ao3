@@ -120,69 +120,52 @@ body {
     }
 }
 
-/* ---------- Builder & Preview Panels ---------- */
-.builder-preview-container {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-/* Builder panel (left) */
-.builder-preview-container .builder_panel {
-    flex: 1;  /* half of container */
+/* ---------- Panels ---------- */
+.panel {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Preview panel (right) */
-.builder-preview-container .preview_panel {
-    flex: 1;  /* half of container */
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    max-height: 90vh;
-    overflow: auto;
+/* ---------- Headings ---------- */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #222;
 }
 
-/* Responsive adjustments */
-@media (max-width: 900px) {
-    .builder-preview-container {
-        flex-direction: column;
-    }
-
-    .builder-preview-container .builder_panel,
-    .builder-preview-container .preview_panel {
-        flex: unset;
-        width: 100%;
-    }
-}
-
-/* ---------- Inputs & Textareas in Builder Panel ---------- */
-.builder_panel input,
-.builder_panel select,
-.builder_panel textarea {
-    width: 100%;
+h3 {
+    font-size: 1.3em;
+    margin-top: 20px;
     margin-bottom: 10px;
+    color: #444;
+}
+
+/* ---------- Inputs & Textareas (general) ---------- */
+input,
+select,
+textarea {
+    display: block;
+    width: 100%;
     padding: 10px 12px;
+    margin-bottom: 12px;
     font-size: 14px;
-    border-radius: 6px;
     border: 1px solid #ccc;
+    border-radius: 6px;
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.builder_panel input:focus,
-.builder_panel select:focus,
-.builder_panel textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
     border-color: #1DA1F2;
     box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.2);
     outline: none;
 }
 
-/* ---------- Buttons in Builder Panel ---------- */
-.builder_panel button {
+/* ---------- Buttons (general) ---------- */
+button {
     background-color: #1DA1F2;
     color: #fff;
     border: none;
@@ -190,32 +173,30 @@ body {
     border-radius: 6px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-    margin-top: 5px;
+    transition: background-color 0.2s ease-in-out;
 }
 
-.builder_panel button:hover {
+button:hover {
     background-color: #0d8ddb;
-    transform: translateY(-1px);
 }
 
-.builder_panel button:disabled {
+button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* ---------- Stats Row (Builder Panel) ---------- */
-.builder_panel .stats-row {
+/* ---------- Stats Row (general) ---------- */
+.stats-row {
     display: flex;
     gap: 10px;
 }
 
-.builder_panel .stats-row div {
+.stats-row div {
     flex: 1;
 }
 
-/* ---------- Replies (Builder Panel) ---------- */
-.builder_panel .reply {
+/* ---------- Replies (editor-only) ---------- */
+.panel:not(.preview) .reply {
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 6px;
@@ -223,17 +204,52 @@ body {
     margin-top: 10px;
 }
 
-.builder_panel .reply input,
-.builder_panel .reply textarea {
+.panel:not(.preview) .reply input,
+.panel:not(.preview) .reply textarea {
     margin-bottom: 8px;
 }
 
-/* ---------- Output textarea (Builder Panel) ---------- */
-.builder_panel #output {
+/* ---------- Output textarea (editor-only) ---------- */
+.panel:not(.preview) #output {
     font-family: monospace;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 10px;
     resize: vertical;
+}
+
+/* ---------- Panels inside editor (editor-only) ---------- */
+.panel:not(.preview) {
+    width: 50%;
+}
+
+/* Flex container for editor + preview panels */
+.editor-preview-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Editor panel: left */
+.editor-preview-container .panel:not(.preview) {
+    flex: 1;  /* takes half of the container */
+}
+
+/* Preview panel: right */
+.editor-preview-container .panel.preview {
+    flex: 1;  /* takes half of the container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .editor-preview-container {
+        flex-direction: column;
+    }
+
+    .editor-preview-container .panel:not(.preview),
+    .editor-preview-container .panel.preview {
+        flex: unset;
+        width: 100%;
+    }
 }

@@ -32,26 +32,63 @@
                 </div>
             </div>
 
-            <!-- Main Document -->
+            <!-- Other Configs -->
             <div class="card-section">
-                <h2>Main Document (Document DB)</h2>
-                <div class="file-preview" id="mainFileConfig">No file assigned</div>
-                <div class="file-actions">
-                    <button onclick="assignMainDocument()">Assign Different File</button>
-                    <button onclick="createMainDocument()">Create New File</button>
+                <h2>Active Files</h2>
+                <p>Here you need to connect the files that you want to be using in this project at the moment. The
+                    Document DB stores all the posts you make and in what order they are, the HTML Output is (as the
+                    mame implies) where your HTML output gets stored that you can copy into Ao3, and the workskin
+                    defines how your date gets rendered in the previw.</p>
+
+                <!-- Cards container -->
+                <div class="account-cards-container">
+
+                    <!-- Main Document -->
+                    <div class="card-section">
+                        <h3>Document DB</h3>
+                        <div class="file-preview" id="mainFileConfig">No file assigned</div>
+                        <div class="file-actions">
+                            <button onclick="assignMainDocument()">Assign Different File</button>
+                            <button onclick="createMainDocument()">Create New File</button>
+                        </div>
+                    </div>
+
+                    <!-- Your HTML Code -->
+                    <div class="card-section">
+                        <h3>Generated HTML Output</h3>
+                        <div class="file-preview" id="outputHTMLConfig">No file assigned</div>
+                        <div class="file-actions">
+                            <button onclick="assignOutputHTML()">Assign Different File</button>
+                            <button onclick="createOutputHTML()">Create New File</button>
+                        </div>
+                    </div>
+
+                    <!-- Workskin -->
+                    <div class="card-section">
+                        <h3>Workskin</h3>
+                        <div class="file-preview" id="workskinFileConfig">No file assigned</div>
+                        <div class="file-actions">
+                            <button onclick="assignWorkskin()">Assign Different File</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
 
             <!-- Account Databases -->
             <div class="card-section">
                 <h2>Account Databases</h2>
+                <p>Each platform can have its own database file. You can assign an existing file or create a new empty
+                    one. This ensures you only have to set up an account once, then you can reference it as many times
+                    as you want without having to add all the data about a specific user each time.</p>
 
                 <!-- Cards container -->
                 <div class="account-cards-container">
 
                     <!-- Twitter Card -->
                     <div class="account-card">
-                        <h3>Twitter Accounts</h3>
+                        <h3>Twitter Accounts DB</h3>
                         <div class="file-preview" id="twitterFileConfig">No file assigned</div>
                         <div class="file-actions">
                             <button onclick="assignTwitterDB()">Assign Different File</button>
@@ -61,7 +98,7 @@
 
                     <!-- Tumblr Card -->
                     <div class="account-card">
-                        <h3>Tumblr Accounts</h3>
+                        <h3>Tumblr Accounts DB</h3>
                         <div class="file-preview" id="tumblrFileConfig">No file assigned</div>
                         <div class="file-actions">
                             <button onclick="assignTumblrDB()">Assign Different File</button>
@@ -78,24 +115,7 @@
                 </div>
             </div>
 
-            <!-- Your HTML Code -->
-            <div class="card-section">
-                <h2>Your HTML Code (Generated Output)</h2>
-                <div class="file-preview" id="outputHTMLConfig">No file assigned</div>
-                <div class="file-actions">
-                    <button onclick="assignOutputHTML()">Assign Different File</button>
-                    <button onclick="createOutputHTML()">Create New File</button>
-                </div>
-            </div>
 
-            <!-- Workskin -->
-            <div class="card-section">
-                <h2>Workskin</h2>
-                <div class="file-preview" id="workskinFileConfig">No file assigned</div>
-                <div class="file-actions">
-                    <button onclick="assignWorkskin()">Assign Different File</button>
-                </div>
-            </div>
 
         </main>
 

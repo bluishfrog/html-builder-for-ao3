@@ -6,6 +6,7 @@ window.project = {
         mainDocument: null,
         twitterDB: null,
         tumblrDB: null,
+        outputHTML: null,
         workskin: null
     }
 };
@@ -15,11 +16,17 @@ function updateProjectUI() {
     document.getElementById("projectStatus").textContent =
         window.project.folderHandle?.name || "No project loaded";
 
+    document.getElementById("mainFileConfig").textContent =
+        window.project.config.mainDocument || "No file assigned";
+
     document.getElementById("twitterFileConfig").textContent =
         window.project.config.twitterDB || "No file assigned";
 
     document.getElementById("tumblrFileConfig").textContent =
         window.project.config.tumblrDB || "No file assigned";
+
+    document.getElementById("outputHTMLConfig").textContent =
+        window.project.config.outputHTML || "No file assigned";
 
     document.getElementById("workskinFileConfig").textContent =
         window.project.config.workskin || "No file assigned";
@@ -28,7 +35,6 @@ function updateProjectUI() {
 // ---------------- Project: Open Existing ----------------
 async function openProject() {
     try {
-        // User selects a folder
         const [folderHandle] = await window.showDirectoryPicker();
         window.project.folderHandle = folderHandle;
 
@@ -65,10 +71,11 @@ async function createNewProject() {
         const folderHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
         window.project.folderHandle = folderHandle;
 
-        // Create empty files in the folder
+        // Create empty files
         const mainDoc = await createFileInFolder(folderHandle, "main_document.html", "<!DOCTYPE html><html><head><title>Main Document</title></head><body></body></html>");
         const twitterDB = await createFileInFolder(folderHandle, "twitter_accounts.html", "<!-- Empty Twitter DB -->");
         const tumblrDB = await createFileInFolder(folderHandle, "tumblr_accounts.html", "<!-- Empty Tumblr DB -->");
+        const outputHTML = await createFileInFolder(folderHandle, "output.html", "<!-- Generated HTML -->");
         const workskin = await createFileInFolder(folderHandle, "workskin.css", "/* Empty Workskin */");
 
         // Save config
@@ -76,6 +83,7 @@ async function createNewProject() {
             mainDocument: mainDoc.name,
             twitterDB: twitterDB.name,
             tumblrDB: tumblrDB.name,
+            outputHTML: outputHTML.name,
             workskin: workskin.name
         };
 
@@ -98,7 +106,55 @@ async function createFileInFolder(folderHandle, fileName, content = "") {
     return handle;
 }
 
-// ---------------- Assign Existing Twitter DB ----------------
+// ---------------- Main Document ----------------
+async function assignMainDocument() {
+    if (!window.project.folderHandle) return alert("Load a project first.");
+    try {
+        const [fileHandle] = await window.showOpenFilePicker({
+            startIn: window.project.folderHandle,
+            types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
+        });
+        window.project.config.mainDocument = fileHandle.name;
+        await saveConfig();
+        updateProjectUI();
+    } catch (err) {
+        console.log("Assign Main Document cancelled or failed:", err);
+    }
+}
+
+async function createMainDocument() {
+    if (!window.project.folderHandle) return alert("Load a project first.");
+    const newFile = await createFileInFolder(window.project.folderHandle, "main_document_new.html", "<!DOCTYPE html><html><head><title>Main Document</title></head><body></body></html>");
+    window.project.config.mainDocument = newFile.name;
+    await saveConfig();
+    updateProjectUI();
+}
+
+// ---------------- Output HTML ----------------
+async function assignOutputHTML() {
+    if (!window.project.folderHandle) return alert("Load a project first.");
+    try {
+        const [fileHandle] = await window.showOpenFilePicker({
+            startIn: window.project.folderHandle,
+            types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
+        });
+        window.project.config.outputHTML = fileHandle.name;
+        await saveConfig();
+        updateProjectUI();
+    } catch (err) {
+        console.log("Assign Output HTML cancelled or failed:", err);
+    }
+}
+
+async function createOutputHTML() {
+    if (!window.project.folderHandle) return alert("Load a project first.");
+    const newFile = await createFileInFolder(window.project.folderHandle, "output_new.html", "<!-- Generated HTML -->");
+    window.project.config.outputHTML = newFile.name;
+    await saveConfig();
+    updateProjectUI();
+}
+
+// ---------------- Account Databases ----------------
 async function assignTwitterDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -114,7 +170,6 @@ async function assignTwitterDB() {
     }
 }
 
-// ---------------- Create New Twitter DB ----------------
 async function createTwitterDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "twitter_accounts_new.html", "<!-- Empty Twitter DB -->");
@@ -123,7 +178,6 @@ async function createTwitterDB() {
     updateProjectUI();
 }
 
-// ---------------- Assign Existing Tumblr DB ----------------
 async function assignTumblrDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -139,7 +193,6 @@ async function assignTumblrDB() {
     }
 }
 
-// ---------------- Create New Tumblr DB ----------------
 async function createTumblrDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "tumblr_accounts_new.html", "<!-- Empty Tumblr DB -->");
@@ -148,7 +201,7 @@ async function createTumblrDB() {
     updateProjectUI();
 }
 
-// ---------------- Assign Workskin ----------------
+// ---------------- Workskin ----------------
 async function assignWorkskin() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -160,14 +213,13 @@ async function assignWorkskin() {
         await saveConfig();
         updateProjectUI();
     } catch (err) {
-        console.log("Assign workskin cancelled or failed:", err);
+        console.log("Assign Workskin cancelled or failed:", err);
     }
 }
 
 // ---------------- Save Project Config ----------------
 async function saveConfig() {
     if (!window.project.configHandle) {
-        // Create config file if missing
         window.project.configHandle = await createFileInFolder(window.project.folderHandle, "Project.config.json", "");
     }
     const writable = await window.project.configHandle.createWritable();

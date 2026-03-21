@@ -31,11 +31,15 @@
                 Choose whether to open an existing HTML document or create a new one.
                 All files remain on your local computer.
             </p>
+
+            <!-- File preview -->
+            <div class="file-preview" id="mainFilePreview">No file selected</div>
+
+            <!-- File actions -->
             <div class="file-actions">
                 <button onclick="openMainFile()">Open Existing File</button>
                 <button onclick="createNewMainFile()">Create New File</button>
                 <button onclick="saveMainFile()" id="saveMainBtn" disabled>Save File</button>
-                <span id="mainFileName"></span>
             </div>
 
             <!-- Account Database -->
@@ -45,20 +49,22 @@
                 create a new one, or load a test database.
             </p>
 
+            <!-- Twitter Accounts -->
             <h3>Twitter Accounts</h3>
+            <div class="file-preview" id="twitterFilePreview">No file selected</div>
             <div class="file-actions">
                 <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
                 <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
                 <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
-                <span id="twitterDBName"></span>
             </div>
 
+            <!-- Tumblr Accounts -->
             <h3>Tumblr Accounts</h3>
+            <div class="file-preview" id="tumblrFilePreview">No file selected</div>
             <div class="file-actions">
                 <button onclick="openTumblrDB()">Open Existing Tumblr DB</button>
                 <button onclick="createNewTumblrDB()">Create New Tumblr DB</button>
                 <button onclick="loadTumblrTest()">Load Tumblr Test DB</button>
-                <span id="tumblrDBName"></span>
             </div>
 
             <!-- Workskin Download -->
@@ -68,7 +74,7 @@
                 Download the version provided or get the latest one yourself.
             </p>
             <div class="file-actions">
-                <a href="assets/workskin_2025.zip" download>
+                <a href="css/skin_2026_SocialMediaFormatting.css" download>
                     <button>Download Workskin</button>
                 </a>
             </div>

@@ -149,6 +149,23 @@ body {
     }
 }
 
+
+
+
+/* ---------- Database Things ---------- */
+
+/* File preview display */
+.file-preview {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+
+
+
+
+
 /* ---------- Builder & Preview Panels ---------- */
 .builder-preview-container {
     display: flex;

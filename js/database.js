@@ -1,56 +1,77 @@
 // ---------------- Main Document ----------------
 let mainFileHandle = null;
 
+// Update the preview of selected file
+function updateFilePreview(spanId, name) {
+    document.getElementById(spanId).textContent = name || "No file selected";
+}
+
+// Open existing main file
 async function openMainFile() {
     try {
         [mainFileHandle] = await window.showOpenFilePicker({
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }],
             multiple: false
         });
-        updateFileName("mainFileName", mainFileHandle.name);
+
+        updateFilePreview("mainFilePreview", mainFileHandle.name);
         document.getElementById("saveMainBtn").disabled = false;
+
         alert("Main document loaded: " + mainFileHandle.name);
     } catch (err) {
         console.log("Open cancelled or failed:", err);
     }
 }
 
+// Create new main file
 async function createNewMainFile() {
     try {
         mainFileHandle = await window.showSaveFilePicker({
             suggestedName: 'main_document.html',
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
+
         const writable = await mainFileHandle.createWritable();
         await writable.write(`<!DOCTYPE html><html><head><title>Main Document</title></head><body></body></html>`);
         await writable.close();
-        updateFileName("mainFileName", mainFileHandle.name);
+
+        updateFilePreview("mainFilePreview", mainFileHandle.name);
         document.getElementById("saveMainBtn").disabled = false;
+
         alert("New main document created: " + mainFileHandle.name);
     } catch (err) {
         console.log("Creation cancelled or failed:", err);
     }
 }
 
+// Save main file
 async function saveMainFile() {
     if (!mainFileHandle) return alert("No file selected.");
-    const writable = await mainFileHandle.createWritable();
-    const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";
-    await writable.write(content);
-    await writable.close();
-    alert("Main file saved!");
+    try {
+        const writable = await mainFileHandle.createWritable();
+        const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";
+        await writable.write(content);
+        await writable.close();
+        alert("Main file saved!");
+    } catch (err) {
+        console.log("Save failed:", err);
+    }
 }
 
-// ---------------- Account DB selection ----------------
+// ---------------- Twitter DB ----------------
 let twitterDBHandle = null;
-let tumblrDBHandle = null;
 
 async function openTwitterDB() {
     try {
-        [twitterDBHandle] = await window.showOpenFilePicker({ types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }] });
-        updateFileName("twitterDBName", twitterDBHandle.name);
+        [twitterDBHandle] = await window.showOpenFilePicker({
+            types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
+        });
+
+        updateFilePreview("twitterFilePreview", twitterDBHandle.name);
         alert("Twitter DB loaded: " + twitterDBHandle.name);
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function createNewTwitterDB() {
@@ -59,27 +80,44 @@ async function createNewTwitterDB() {
             suggestedName: "twitter_accounts.html",
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
+
         const writable = await twitterDBHandle.createWritable();
         await writable.write("<!-- Empty Twitter DB -->");
         await writable.close();
-        updateFileName("twitterDBName", twitterDBHandle.name);
+
+        updateFilePreview("twitterFilePreview", twitterDBHandle.name);
         alert("New Twitter DB created: " + twitterDBHandle.name);
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function loadTwitterTest() {
-    const res = await fetch("test_data/twitter_test.html");
-    const text = await res.text();
-    console.log("Twitter test DB loaded:", text);
+    try {
+        const res = await fetch("test_data/twitter_test.html");
+        const text = await res.text();
+        localStorage.setItem("twitterDB", text);
+        updateFilePreview("twitterFilePreview", "Test Twitter DB");
+        alert("Loaded Twitter test DB!");
+    } catch (err) {
+        console.log("Failed to load Twitter test DB:", err);
+    }
 }
 
-// Tumblr DB
+// ---------------- Tumblr DB ----------------
+let tumblrDBHandle = null;
+
 async function openTumblrDB() {
     try {
-        [tumblrDBHandle] = await window.showOpenFilePicker({ types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }] });
-        updateFileName("tumblrDBName", tumblrDBHandle.name);
+        [tumblrDBHandle] = await window.showOpenFilePicker({
+            types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
+        });
+
+        updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
         alert("Tumblr DB loaded: " + tumblrDBHandle.name);
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function createNewTumblrDB() {
@@ -88,21 +126,26 @@ async function createNewTumblrDB() {
             suggestedName: "tumblr_accounts.html",
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
+
         const writable = await tumblrDBHandle.createWritable();
         await writable.write("<!-- Empty Tumblr DB -->");
         await writable.close();
-        updateFileName("tumblrDBName", tumblrDBHandle.name);
+
+        updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
         alert("New Tumblr DB created: " + tumblrDBHandle.name);
-    } catch (err) { console.log(err); }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function loadTumblrTest() {
-    const res = await fetch("test_data/tumblr_test.html");
-    const text = await res.text();
-    console.log("Tumblr test DB loaded:", text);
-}
-
-// ---------------- Utility ----------------
-function updateFileName(spanId, name) {
-    document.getElementById(spanId).textContent = name;
+    try {
+        const res = await fetch("test_data/tumblr_test.html");
+        const text = await res.text();
+        localStorage.setItem("tumblrDB", text);
+        updateFilePreview("tumblrFilePreview", "Test Tumblr DB");
+        alert("Loaded Tumblr test DB!");
+    } catch (err) {
+        console.log("Failed to load Tumblr test DB:", err);
+    }
 }

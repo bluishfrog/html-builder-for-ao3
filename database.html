@@ -2,8 +2,10 @@
 <html lang="en">
 
 <head>
-    <div id="head-placeholder"></div>
-    <script src="js/loadComponents.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Configuration</title>
+    <link rel="stylesheet" href="css/site_style.css">
 </head>
 
 <body>
@@ -17,40 +19,31 @@
 
             <h1>Configuration of Your Database</h1>
             <p>
-                This is where you set up and manage the files that store your content and account info.
-                Everything stays on your computer; nothing is automatically uploaded or saved online.
-                Make sure to download your files regularly while you work, so you don’t lose any progress.
-                Think of this page as your little control center for keeping things organized.
+                Manage your projects containing all your files: main document, account databases, workskin, and generated HTML.
             </p>
 
-            <!-- Main Document Setup -->
+            <!-- Project Setup -->
             <div class="card-section">
-                <h2>Main Document Setup</h2>
+                <h2>Project Setup</h2>
                 <p>
-                    Choose your main document, the one that holds the core of your content. Open an existing file
-                    or start fresh with a new one. Remember to save often!
+                    Each project is a folder containing all your files. One config file defines the main document, account DBs, output, and workskin.
+                    You can open an existing project or create a new one. Validation ensures all required files are present.
                 </p>
-                <div class="file-preview" id="mainFilePreview">No file selected</div>
+                <div class="file-preview" id="projectStatus">No project loaded</div>
                 <div class="file-actions">
-                    <button onclick="openMainFile()">Open Existing File</button>
-                    <button onclick="createNewMainFile()">Create New File</button>
-                    <button onclick="downloadMainFile()" id="downloadMainBtn" disabled>Download File</button>
+                    <button onclick="Project.openProject()">Open Existing Project</button>
+                    <button onclick="Project.createNewProject()">Create New Project</button>
                 </div>
             </div>
-
 
             <!-- Account Database -->
             <div class="card-section">
                 <h2>Account Database</h2>
                 <p>
                     Each platform can have its own database file where account info is stored.
-                    You can open an existing file, create a new one, or use one of our pre-made test databases.
-                    This helps keep your accounts neat and separate for each platform. Make sure to download those too
-                    if
-                    you want to keep working on this project.
+                    You can add, edit, or load test data once a project is loaded.
                 </p>
 
-                <!-- Cards container -->
                 <div class="account-cards-container">
 
                     <!-- Twitter Card -->
@@ -58,12 +51,13 @@
                         <h3>Twitter Accounts</h3>
                         <div class="file-preview" id="twitterFilePreview">No file selected</div>
                         <div class="file-actions">
-                            <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
-                            <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
-                            <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
-                            <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter
-                                DB</button>
+                            <button onclick="AccountDB.openAccountDB('twitter')">Open Existing Twitter DB</button>
+                            <button onclick="AccountDB.createAccountDB('twitter')">Create New Twitter DB</button>
+                            <button onclick="AccountDB.loadTestData('twitter')">Load Twitter Test DB</button>
+                            <button onclick="AccountDB.downloadDB('twitter')" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
                         </div>
+                        <div id="twitterList" class="account-list"></div>
+                        <button id="addTwitterBtn" onclick="AccountDB.openAddForm('twitter')" disabled>+ Add Account</button>
                     </div>
 
                     <!-- Tumblr Card -->
@@ -71,18 +65,13 @@
                         <h3>Tumblr Accounts</h3>
                         <div class="file-preview" id="tumblrFilePreview">No file selected</div>
                         <div class="file-actions">
-                            <button onclick="openTumblrDB()">Open Existing Tumblr DB</button>
-                            <button onclick="createNewTumblrDB()">Create New Tumblr DB</button>
-                            <button onclick="loadTumblrTest()">Load Tumblr Test DB</button>
-                            <button onclick="downloadTumblrDB()" id="downloadTumblrBtn" disabled>Download Tumblr
-                                DB</button>
+                            <button onclick="AccountDB.openAccountDB('tumblr')">Open Existing Tumblr DB</button>
+                            <button onclick="AccountDB.createAccountDB('tumblr')">Create New Tumblr DB</button>
+                            <button onclick="AccountDB.loadTestData('tumblr')">Load Tumblr Test DB</button>
+                            <button onclick="AccountDB.downloadDB('tumblr')" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
                         </div>
-                    </div>
-
-                    <!-- New Card -->
-                    <div class="account-card">
-                        <h3>Potentially Other Plattforms?</h3>
-                        <p>No promises but feel free to make suggestions!</p>
+                        <div id="tumblrList" class="account-list"></div>
+                        <button id="addTumblrBtn" onclick="AccountDB.openAddForm('tumblr')" disabled>+ Add Account</button>
                     </div>
 
                 </div>
@@ -92,14 +81,10 @@
             <div class="card-section">
                 <h2>Workskin Download</h2>
                 <p>
-                    To make sure your posts look right on AO3, you need the correct workskin file.
-                    You can download the version we provide here, or grab the latest version yourself and tweak it as
-                    needed. This doesn’t affect your content files—it just controls how things are displayed.
+                    Download the workskin file connected to the current project.
                 </p>
                 <div class="file-actions">
-                    <a href="css/skin_2026_SocialMediaFormatting.css" download>
-                        <button>Download Workskin</button>
-                    </a>
+                    <button onclick="Project.downloadWorkskin()" id="downloadWorkskinBtn" disabled>Download Workskin</button>
                 </div>
             </div>
 
@@ -112,7 +97,7 @@
 
     <!-- SCRIPTS -->
     <script src="js/loadComponents.js"></script>
-    <script src="js/database.js"></script>
+    <script src="js/project.js"></script>
     <script src="js/account_database.js"></script>
 </body>
 

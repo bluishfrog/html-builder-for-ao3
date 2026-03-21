@@ -47,16 +47,20 @@
                 </div>
             </div>
 
-            <!-- Account Database -->
-            <div class="card-section">
-                <h2>Account Database</h2>
-                <p>
-                    Each platform can have its own database file where account info is stored.
-                    You can open an existing file, create a new one, or use one of our pre-made test databases.
-                    This helps keep your accounts neat and separate for each platform. Make sure to download those too!
-                </p>
 
-                <!-- Twitter -->
+            <!-- Account Database -->
+            <h2>Account Database</h2>
+            <p>
+                Each platform can have its own database file where account info is stored.
+                You can open an existing file, create a new one, or use one of our pre-made test databases.
+                This helps keep your accounts neat and separate for each platform. Make sure to download those too if
+                you want to keep working on this project.
+            </p>
+
+            <!-- Cards container -->
+            <div class="account-cards-container">
+
+                <!-- Twitter Card -->
                 <div class="account-card">
                     <h3>Twitter Accounts</h3>
                     <div class="file-preview" id="twitterFilePreview">No file selected</div>
@@ -64,11 +68,12 @@
                         <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
                         <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
                         <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
-                        <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
+                        <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter
+                            DB</button>
                     </div>
                 </div>
 
-                <!-- Tumblr -->
+                <!-- Tumblr Card -->
                 <div class="account-card">
                     <h3>Tumblr Accounts</h3>
                     <div class="file-preview" id="tumblrFilePreview">No file selected</div>
@@ -79,6 +84,7 @@
                         <button onclick="downloadTumblrDB()" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
                     </div>
                 </div>
+
             </div>
 
             <!-- Workskin Download -->

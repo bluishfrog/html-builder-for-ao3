@@ -16,8 +16,6 @@ async function openMainFile() {
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
         document.getElementById("saveMainBtn").disabled = false;
-
-        alert("Main document loaded: " + mainFileHandle.name);
     } catch (err) {
         console.log("Open cancelled or failed:", err);
     }
@@ -37,8 +35,6 @@ async function createNewMainFile() {
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
         document.getElementById("saveMainBtn").disabled = false;
-
-        alert("New main document created: " + mainFileHandle.name);
     } catch (err) {
         console.log("Creation cancelled or failed:", err);
     }
@@ -52,7 +48,6 @@ async function saveMainFile() {
         const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";
         await writable.write(content);
         await writable.close();
-        alert("Main file saved!");
     } catch (err) {
         console.log("Save failed:", err);
     }
@@ -68,7 +63,6 @@ async function openTwitterDB() {
         });
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
-        alert("Twitter DB loaded: " + twitterDBHandle.name);
     } catch (err) {
         console.log(err);
     }
@@ -86,7 +80,6 @@ async function createNewTwitterDB() {
         await writable.close();
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
-        alert("New Twitter DB created: " + twitterDBHandle.name);
     } catch (err) {
         console.log(err);
     }
@@ -98,7 +91,6 @@ async function loadTwitterTest() {
         const text = await res.text();
         localStorage.setItem("twitterDB", text);
         updateFilePreview("twitterFilePreview", "Test Twitter DB");
-        alert("Loaded Twitter test DB!");
     } catch (err) {
         console.log("Failed to load Twitter test DB:", err);
     }
@@ -114,7 +106,6 @@ async function openTumblrDB() {
         });
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
-        alert("Tumblr DB loaded: " + tumblrDBHandle.name);
     } catch (err) {
         console.log(err);
     }
@@ -132,7 +123,6 @@ async function createNewTumblrDB() {
         await writable.close();
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
-        alert("New Tumblr DB created: " + tumblrDBHandle.name);
     } catch (err) {
         console.log(err);
     }
@@ -144,7 +134,6 @@ async function loadTumblrTest() {
         const text = await res.text();
         localStorage.setItem("tumblrDB", text);
         updateFilePreview("tumblrFilePreview", "Test Tumblr DB");
-        alert("Loaded Tumblr test DB!");
     } catch (err) {
         console.log("Failed to load Tumblr test DB:", err);
     }

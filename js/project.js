@@ -8,7 +8,13 @@ window.project = {
         tumblrDB: null,
         outputHTML: null,
         workskin: null
-    }
+    },
+    // File handles for quick reference (optional)
+    mainDocumentHandle: null,
+    twitterDBHandle: null,
+    tumblrDBHandle: null,
+    outputHTMLHandle: null,
+    workskinHandle: null
 };
 
 // ---------------- Utility: Update UI Previews ----------------
@@ -35,7 +41,7 @@ function updateProjectUI() {
 // ---------------- Project: Open Existing ----------------
 async function openProject() {
     try {
-        const [folderHandle] = await window.showDirectoryPicker();
+        const folderHandle = await window.showDirectoryPicker();
         window.project.folderHandle = folderHandle;
 
         // Look for Project.config.json
@@ -57,6 +63,9 @@ async function openProject() {
         const file = await configFile.getFile();
         const text = await file.text();
         window.project.config = JSON.parse(text);
+
+        // Load handles for each assigned file if they exist in folder
+        await loadFileHandles();
 
         updateProjectUI();
         alert("Project loaded successfully.");
@@ -90,6 +99,13 @@ async function createNewProject() {
         const configHandle = await createFileInFolder(folderHandle, "Project.config.json", JSON.stringify(window.project.config, null, 4));
         window.project.configHandle = configHandle;
 
+        // Store file handles
+        window.project.mainDocumentHandle = mainDoc;
+        window.project.twitterDBHandle = twitterDB;
+        window.project.tumblrDBHandle = tumblrDB;
+        window.project.outputHTMLHandle = outputHTML;
+        window.project.workskinHandle = workskin;
+
         updateProjectUI();
         alert("New project created successfully.");
     } catch (err) {
@@ -106,7 +122,26 @@ async function createFileInFolder(folderHandle, fileName, content = "") {
     return handle;
 }
 
-// ---------------- Main Document ----------------
+// ---------------- Utility: Load Handles from Config ----------------
+async function loadFileHandles() {
+    const folder = window.project.folderHandle;
+    const config = window.project.config;
+
+    async function findHandle(fileName) {
+        for await (const entry of folder.values()) {
+            if (entry.kind === "file" && entry.name === fileName) return entry;
+        }
+        return null;
+    }
+
+    window.project.mainDocumentHandle = config.mainDocument ? await findHandle(config.mainDocument) : null;
+    window.project.twitterDBHandle = config.twitterDB ? await findHandle(config.twitterDB) : null;
+    window.project.tumblrDBHandle = config.tumblrDB ? await findHandle(config.tumblrDB) : null;
+    window.project.outputHTMLHandle = config.outputHTML ? await findHandle(config.outputHTML) : null;
+    window.project.workskinHandle = config.workskin ? await findHandle(config.workskin) : null;
+}
+
+// ---------------- Assign / Create Main Document ----------------
 async function assignMainDocument() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -115,6 +150,7 @@ async function assignMainDocument() {
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
         window.project.config.mainDocument = fileHandle.name;
+        window.project.mainDocumentHandle = fileHandle;
         await saveConfig();
         updateProjectUI();
     } catch (err) {
@@ -126,11 +162,12 @@ async function createMainDocument() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "main_document_new.html", "<!DOCTYPE html><html><head><title>Main Document</title></head><body></body></html>");
     window.project.config.mainDocument = newFile.name;
+    window.project.mainDocumentHandle = newFile;
     await saveConfig();
     updateProjectUI();
 }
 
-// ---------------- Output HTML ----------------
+// ---------------- Assign / Create Output HTML ----------------
 async function assignOutputHTML() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -139,6 +176,7 @@ async function assignOutputHTML() {
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
         window.project.config.outputHTML = fileHandle.name;
+        window.project.outputHTMLHandle = fileHandle;
         await saveConfig();
         updateProjectUI();
     } catch (err) {
@@ -150,11 +188,12 @@ async function createOutputHTML() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "output_new.html", "<!-- Generated HTML -->");
     window.project.config.outputHTML = newFile.name;
+    window.project.outputHTMLHandle = newFile;
     await saveConfig();
     updateProjectUI();
 }
 
-// ---------------- Account Databases ----------------
+// ---------------- Assign / Create Account DBs ----------------
 async function assignTwitterDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -163,6 +202,7 @@ async function assignTwitterDB() {
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
         window.project.config.twitterDB = fileHandle.name;
+        window.project.twitterDBHandle = fileHandle;
         await saveConfig();
         updateProjectUI();
     } catch (err) {
@@ -174,6 +214,7 @@ async function createTwitterDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "twitter_accounts_new.html", "<!-- Empty Twitter DB -->");
     window.project.config.twitterDB = newFile.name;
+    window.project.twitterDBHandle = newFile;
     await saveConfig();
     updateProjectUI();
 }
@@ -186,6 +227,7 @@ async function assignTumblrDB() {
             types: [{ description: "HTML Files", accept: { "text/html": [".html"] } }]
         });
         window.project.config.tumblrDB = fileHandle.name;
+        window.project.tumblrDBHandle = fileHandle;
         await saveConfig();
         updateProjectUI();
     } catch (err) {
@@ -197,11 +239,12 @@ async function createTumblrDB() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     const newFile = await createFileInFolder(window.project.folderHandle, "tumblr_accounts_new.html", "<!-- Empty Tumblr DB -->");
     window.project.config.tumblrDB = newFile.name;
+    window.project.tumblrDBHandle = newFile;
     await saveConfig();
     updateProjectUI();
 }
 
-// ---------------- Workskin ----------------
+// ---------------- Assign Workskin ----------------
 async function assignWorkskin() {
     if (!window.project.folderHandle) return alert("Load a project first.");
     try {
@@ -210,6 +253,7 @@ async function assignWorkskin() {
             types: [{ description: "CSS Files", accept: { "text/css": [".css"] } }]
         });
         window.project.config.workskin = fileHandle.name;
+        window.project.workskinHandle = fileHandle;
         await saveConfig();
         updateProjectUI();
     } catch (err) {

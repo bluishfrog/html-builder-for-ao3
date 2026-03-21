@@ -17,9 +17,10 @@
         <!-- MAIN CONTENT -->
         <main class="main-content">
 
-            <h1>Configuration of Your Database</h1>
+            <h1>Configuration of Your Project</h1>
             <p>
                 Manage your projects containing all your files: main document, account databases, workskin, and generated HTML.
+                You can open an existing project or create a new one. Validation ensures all required files are present.
             </p>
 
             <!-- Project Setup -->
@@ -27,7 +28,6 @@
                 <h2>Project Setup</h2>
                 <p>
                     Each project is a folder containing all your files. One config file defines the main document, account DBs, output, and workskin.
-                    You can open an existing project or create a new one. Validation ensures all required files are present.
                 </p>
                 <div class="file-preview" id="projectStatus">No project loaded</div>
                 <div class="file-actions">
@@ -36,55 +36,49 @@
                 </div>
             </div>
 
-            <!-- Account Database -->
+            <!-- Account Database Configuration -->
             <div class="card-section">
-                <h2>Account Database</h2>
-                <p>
-                    Each platform can have its own database file where account info is stored.
-                    You can add, edit, or load test data once a project is loaded.
-                </p>
-
+                <h2>Account Database Configuration</h2>
                 <div class="account-cards-container">
 
                     <!-- Twitter Card -->
                     <div class="account-card">
                         <h3>Twitter Accounts</h3>
-                        <div class="file-preview" id="twitterFilePreview">No file selected</div>
+                        <div class="file-preview" id="twitterFileConfig">No file assigned</div>
                         <div class="file-actions">
-                            <button onclick="AccountDB.openAccountDB('twitter')">Open Existing Twitter DB</button>
-                            <button onclick="AccountDB.createAccountDB('twitter')">Create New Twitter DB</button>
-                            <button onclick="AccountDB.loadTestData('twitter')">Load Twitter Test DB</button>
-                            <button onclick="AccountDB.downloadDB('twitter')" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
+                            <button onclick="Project.assignAccountDB('twitter')">Assign Different File</button>
+                            <button onclick="Project.createAccountDBFile('twitter')">Create New Twitter DB</button>
                         </div>
-                        <div id="twitterList" class="account-list"></div>
-                        <button id="addTwitterBtn" onclick="AccountDB.openAddForm('twitter')" disabled>+ Add Account</button>
                     </div>
 
                     <!-- Tumblr Card -->
                     <div class="account-card">
                         <h3>Tumblr Accounts</h3>
-                        <div class="file-preview" id="tumblrFilePreview">No file selected</div>
+                        <div class="file-preview" id="tumblrFileConfig">No file assigned</div>
                         <div class="file-actions">
-                            <button onclick="AccountDB.openAccountDB('tumblr')">Open Existing Tumblr DB</button>
-                            <button onclick="AccountDB.createAccountDB('tumblr')">Create New Tumblr DB</button>
-                            <button onclick="AccountDB.loadTestData('tumblr')">Load Tumblr Test DB</button>
-                            <button onclick="AccountDB.downloadDB('tumblr')" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
+                            <button onclick="Project.assignAccountDB('tumblr')">Assign Different File</button>
+                            <button onclick="Project.createAccountDBFile('tumblr')">Create New Tumblr DB</button>
                         </div>
-                        <div id="tumblrList" class="account-list"></div>
-                        <button id="addTumblrBtn" onclick="AccountDB.openAddForm('tumblr')" disabled>+ Add Account</button>
+                    </div>
+
+                    <!-- Other Platforms Card -->
+                    <div class="account-card">
+                        <h3>Other Platforms</h3>
+                        <p>No promises but feel free to make suggestions!</p>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Workskin Download -->
+            <!-- Workskin Configuration -->
             <div class="card-section">
-                <h2>Workskin Download</h2>
+                <h2>Workskin Configuration</h2>
                 <p>
-                    Download the workskin file connected to the current project.
+                    Connect the CSS workskin used for your project. This file controls how posts are displayed.
                 </p>
+                <div class="file-preview" id="workskinFileConfig">No file assigned</div>
                 <div class="file-actions">
-                    <button onclick="Project.downloadWorkskin()" id="downloadWorkskinBtn" disabled>Download Workskin</button>
+                    <button onclick="Project.assignWorkskin()">Assign Different Workskin File</button>
                 </div>
             </div>
 
@@ -98,7 +92,6 @@
     <!-- SCRIPTS -->
     <script src="js/loadComponents.js"></script>
     <script src="js/project.js"></script>
-    <script src="js/account_database.js"></script>
 </body>
 
 </html>

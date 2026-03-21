@@ -170,16 +170,26 @@ html, body {
 }
 
 /* ---------- File Preview ---------- */
-.file-preview {
+.account-cards-container.file-preview {
     font-size: 0.95em;
     color: #555;
     font-style: italic;
     padding: 8px 12px;
     background-color: #f0f8ff;
-    border-left: 4px solid #C9F2FF;
     margin-bottom: 10px;
     border-radius: 4px;
 }
+
+.account-cards.file-preview {
+    font-size: 0.95em;
+    color: #555;
+    font-style: italic;
+    padding: 8px 12px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {

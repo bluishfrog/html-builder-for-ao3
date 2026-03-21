@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Configuration</title>
+    <div id="head-placeholder"></div>
+    <script src="js/loadComponents.js"></script>
     <link rel="stylesheet" href="css/site_style.css">
 </head>
 
@@ -17,28 +16,35 @@
         <!-- MAIN CONTENT -->
         <main class="main-content">
 
-            <h1>Configuration of Your Project</h1>
+            <h1>Configuration of Your Database</h1>
             <p>
-                Manage your projects containing all your files: main document, account databases, workskin, and generated HTML.
-                You can open an existing project or create a new one. Validation ensures all required files are present.
+                This is where you set up and manage the files that store your content and account info.
+                Everything stays on your computer; nothing is automatically uploaded or saved online.
+                Think of this page as your little control center for keeping things organized.
             </p>
 
             <!-- Project Setup -->
             <div class="card-section">
                 <h2>Project Setup</h2>
                 <p>
-                    Each project is a folder containing all your files. One config file defines the main document, account DBs, output, and workskin.
+                    Each project is a folder containing all your files. Open an existing project or create a new one.
                 </p>
+
                 <div class="file-preview" id="projectStatus">No project loaded</div>
                 <div class="file-actions">
-                    <button onclick="Project.openProject()">Open Existing Project</button>
-                    <button onclick="Project.createNewProject()">Create New Project</button>
+                    <button onclick="openProject()">Open Existing Project</button>
+                    <button onclick="createNewProject()">Create New Project</button>
                 </div>
             </div>
 
-            <!-- Account Database Configuration -->
+            <!-- Account Database -->
             <div class="card-section">
-                <h2>Account Database Configuration</h2>
+                <h2>Account Database</h2>
+                <p>
+                    Each platform can have its own database file. You can assign an existing file or create a new empty one.
+                    This ensures your accounts are neatly organized for each platform.
+                </p>
+
                 <div class="account-cards-container">
 
                     <!-- Twitter Card -->
@@ -46,8 +52,8 @@
                         <h3>Twitter Accounts</h3>
                         <div class="file-preview" id="twitterFileConfig">No file assigned</div>
                         <div class="file-actions">
-                            <button onclick="Project.assignAccountDB('twitter')">Assign Different File</button>
-                            <button onclick="Project.createAccountDBFile('twitter')">Create New Twitter DB</button>
+                            <button onclick="assignTwitterDB()">Assign Different File</button>
+                            <button onclick="createTwitterDB()">Create New Twitter DB</button>
                         </div>
                     </div>
 
@@ -56,29 +62,30 @@
                         <h3>Tumblr Accounts</h3>
                         <div class="file-preview" id="tumblrFileConfig">No file assigned</div>
                         <div class="file-actions">
-                            <button onclick="Project.assignAccountDB('tumblr')">Assign Different File</button>
-                            <button onclick="Project.createAccountDBFile('tumblr')">Create New Tumblr DB</button>
+                            <button onclick="assignTumblrDB()">Assign Different File</button>
+                            <button onclick="createTumblrDB()">Create New Tumblr DB</button>
                         </div>
                     </div>
 
-                    <!-- Other Platforms Card -->
+                    <!-- Future Platforms -->
                     <div class="account-card">
-                        <h3>Other Platforms</h3>
+                        <h3>Potentially Other Platforms?</h3>
                         <p>No promises but feel free to make suggestions!</p>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Workskin Configuration -->
+            <!-- Workskin -->
             <div class="card-section">
                 <h2>Workskin Configuration</h2>
                 <p>
-                    Connect the CSS workskin used for your project. This file controls how posts are displayed.
+                    The workskin controls how posts are displayed. Assign the file used for this project here.
                 </p>
+
                 <div class="file-preview" id="workskinFileConfig">No file assigned</div>
                 <div class="file-actions">
-                    <button onclick="Project.assignWorkskin()">Assign Different Workskin File</button>
+                    <button onclick="assignWorkskin()">Assign Different Workskin File</button>
                 </div>
             </div>
 
@@ -92,6 +99,8 @@
     <!-- SCRIPTS -->
     <script src="js/loadComponents.js"></script>
     <script src="js/project.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/account_database.js"></script>
 </body>
 
 </html>

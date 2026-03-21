@@ -116,32 +116,55 @@ async function createNewTwitterDB() {
 
 async function loadTwitterTest() {
     try {
-        const res = await fetch("test_data/twitter_test.html");
+        // Fetch your renamed test file
+        const res = await fetch("test_data/twitter_test_db.html");
         const text = await res.text();
+
+        // Save to localStorage
         localStorage.setItem("twitterDB", text);
+
+        // Update the file preview and mark the DB handle as null (because it's a test file, not a local file)
+        twitterDBHandle = null;
         updateFilePreview("twitterFilePreview", "Test Twitter DB");
+
+        // Enable the add account button since the DB is now loaded
+        document.getElementById("addTwitterBtn").disabled = false;
+
+        // Optionally, render the accounts immediately
+        if (typeof accountDBs !== "undefined") {
+            accountDBs.twitter = parseAccountsFromHTML("twitter", text);
+        }
+
+        renderTwitterAccounts();
     } catch (err) {
         console.log("Failed to load Twitter test DB:", err);
+        alert("Could not load Twitter test data.");
     }
 }
 
-async function downloadTwitterDB() {
+
+async function loadTumblrTest() {
     try {
-        const content = localStorage.getItem("twitterDB") || "<!-- Empty Twitter DB -->";
-        const blob = new Blob([content], { type: "text/html" });
-        const url = URL.createObjectURL(blob);
+        const res = await fetch("test_data/tumblr_test_db.html");
+        const text = await res.text();
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = twitterDBHandle?.name || "twitter_accounts.html";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+        localStorage.setItem("tumblrDB", text);
+
+        tumblrDBHandle = null;
+        updateFilePreview("tumblrFilePreview", "Test Tumblr DB");
+        document.getElementById("addTumblrBtn").disabled = false;
+
+        if (typeof accountDBs !== "undefined") {
+            accountDBs.tumblr = parseAccountsFromHTML("tumblr", text);
+        }
+
+        renderTumblrAccounts();
     } catch (err) {
-        console.log("Download failed:", err);
+        console.log("Failed to load Tumblr test DB:", err);
+        alert("Could not load Tumblr test data.");
     }
 }
+
 
 // ---------------- Tumblr DB ----------------
 let tumblrDBHandle = null;

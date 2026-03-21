@@ -132,6 +132,7 @@ html, body {
 
 /* ---------- Main Document Card ---------- */
 .card-section {
+    margin-top: 20px;  /* adds space before first card */
     background-color: #ffffff;
     border-radius: 10px;
     padding: 20px;
@@ -149,15 +150,17 @@ html, body {
 }
 
 .account-card {
-    background-color: #f5f5f5;
+    background-color: #e6f7fa;  /* updated lighter blue */
     border-radius: 8px;
     padding: 15px 20px;
-    flex: 1;          /* equal width side by side */
-    min-width: 280px; /* prevents narrow cards */
+    flex: 1;
+    min-width: 280px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.account-card h3 {
+.account-card h3,
+.card-section h2 {
+    color: #33337C;  /* secondary signature color */
     margin-top: 0;
     margin-bottom: 8px;
 }
@@ -205,7 +208,7 @@ html, body {
 }
 
 button:disabled {
-    background-color: #e0e0e0;
+    background-color: #d0d0d0; /* warmer grey for disabled */
     color: #aaa;
     cursor: not-allowed;
     box-shadow: none;

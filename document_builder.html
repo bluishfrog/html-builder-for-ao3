@@ -28,25 +28,13 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="site-nav">
-        <div class="nav-content">
-            <a href="index.html" class="home-link">
-                <img src="assets/Bluish_Frog_Logo_transparent.png" alt="Home">
-            </a>
-            <span class="separator"></span>
-            <a href="document_builder.html">Document Builder</a>
-            <span class="separator"></span>
-            <a href="account_database.html">Account Database</a>
-            <span class="separator"></span>
-            <a href="documentation.html">User Guide</a>
-        </div>
-    </nav>
+    <div id="nav-placeholder"></div>
 
     <!-- Main container -->
-    <div class="editor-preview-container">
+    <div class="main-container">
 
         <!-- LEFT: EDITOR -->
-        <div class="builder_panel">
+        <div class="panel builder-panel">
             <h2>Builder</h2>
 
             <h3>Create New Post</h3>
@@ -101,13 +89,17 @@
         </div>
 
         <!-- RIGHT: AO3 PREVIEW -->
-        <div class="preview_panel">
+        <div class="panel preview-panel">
             <div id="workskin">
                 <div id="preview"></div>
             </div>
         </div>
 
     </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/loadComponents.js"></script>
 
     <!-- Scripts -->
     <script src="js/test_accounts.js"></script>
@@ -144,6 +136,7 @@
             update(); // refresh preview
         });
     </script>
+
 
 </body>
 

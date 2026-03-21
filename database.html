@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
     <div class="page-wrapper">
 
         <!-- NAV -->
@@ -34,63 +33,67 @@
             </p>
 
             <!-- Main Document Setup -->
-            <h2>Main Document Setup</h2>
-            <p>
-                Here’s where you choose your main document, the one that holds the core of your content.
-                You can either open an existing HTML file from your computer or start fresh with a new one.
-                Your files stay local, so remember to save often while you work!
-            </p>
-
-            <!-- File preview -->
-            <div class="file-preview" id="mainFilePreview">No file selected</div>
-
-            <!-- File actions -->
-            <div class="file-actions">
-                <button onclick="openMainFile()">Open Existing File</button>
-                <button onclick="createNewMainFile()">Create New File</button>
-                <button onclick="downloadMainFile()" id="downloadMainBtn" disabled>Download File</button>
+            <div class="card-section">
+                <h2>Main Document Setup</h2>
+                <p>
+                    Choose your main document, the one that holds the core of your content. Open an existing file
+                    or start fresh with a new one. Remember to save often!
+                </p>
+                <div class="file-preview" id="mainFilePreview">No file selected</div>
+                <div class="file-actions">
+                    <button onclick="openMainFile()">Open Existing File</button>
+                    <button onclick="createNewMainFile()">Create New File</button>
+                    <button onclick="downloadMainFile()" id="downloadMainBtn" disabled>Download File</button>
+                </div>
             </div>
 
             <!-- Account Database -->
-            <h2>Account Database</h2>
-            <p>
-                Each platform can have its own database file where account info is stored.
-                You can open an existing file, create a new one, or use one of our pre-made test databases.
-                This helps keep your accounts neat and separate for each platform. Make sure to download those too if
-                you want to keep working on this project.
-            </p>
+            <div class="card-section">
+                <h2>Account Database</h2>
+                <p>
+                    Each platform can have its own database file where account info is stored.
+                    You can open an existing file, create a new one, or use one of our pre-made test databases.
+                    This helps keep your accounts neat and separate for each platform. Make sure to download those too!
+                </p>
 
-            <!-- Twitter Accounts -->
-            <h3>Twitter Accounts</h3>
-            <div class="file-preview" id="twitterFilePreview">No file selected</div>
-            <div class="file-actions">
-                <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
-                <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
-                <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
-                <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
-            </div>
+                <!-- Twitter -->
+                <div class="account-card">
+                    <h3>Twitter Accounts</h3>
+                    <div class="file-preview" id="twitterFilePreview">No file selected</div>
+                    <div class="file-actions">
+                        <button onclick="openTwitterDB()">Open Existing Twitter DB</button>
+                        <button onclick="createNewTwitterDB()">Create New Twitter DB</button>
+                        <button onclick="loadTwitterTest()">Load Twitter Test DB</button>
+                        <button onclick="downloadTwitterDB()" id="downloadTwitterBtn" disabled>Download Twitter DB</button>
+                    </div>
+                </div>
 
-            <!-- Tumblr Accounts -->
-            <h3>Tumblr Accounts</h3>
-            <div class="file-preview" id="tumblrFilePreview">No file selected</div>
-            <div class="file-actions">
-                <button onclick="openTumblrDB()">Open Existing Tumblr DB</button>
-                <button onclick="createNewTumblrDB()">Create New Tumblr DB</button>
-                <button onclick="loadTumblrTest()">Load Tumblr Test DB</button>
-                <button onclick="downloadTumblrDB()" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
+                <!-- Tumblr -->
+                <div class="account-card">
+                    <h3>Tumblr Accounts</h3>
+                    <div class="file-preview" id="tumblrFilePreview">No file selected</div>
+                    <div class="file-actions">
+                        <button onclick="openTumblrDB()">Open Existing Tumblr DB</button>
+                        <button onclick="createNewTumblrDB()">Create New Tumblr DB</button>
+                        <button onclick="loadTumblrTest()">Load Tumblr Test DB</button>
+                        <button onclick="downloadTumblrDB()" id="downloadTumblrBtn" disabled>Download Tumblr DB</button>
+                    </div>
+                </div>
             </div>
 
             <!-- Workskin Download -->
-            <h2>Workskin Download</h2>
-            <p>
-                To make sure your posts look right on AO3, you need the correct workskin file.
-                You can download the version we provide here, or grab the latest version yourself and tweak it as
-                needed. This doesn’t affect your content files—it just controls how things are displayed.
-            </p>
-            <div class="file-actions">
-                <a href="css/skin_2026_SocialMediaFormatting.css" download>
-                    <button>Download Workskin</button>
-                </a>
+            <div class="card-section">
+                <h2>Workskin Download</h2>
+                <p>
+                    To make sure your posts look right on AO3, you need the correct workskin file.
+                    You can download the version we provide here, or grab the latest version yourself and tweak it as
+                    needed. This doesn’t affect your content files—it just controls how things are displayed.
+                </p>
+                <div class="file-actions">
+                    <a href="css/skin_2026_SocialMediaFormatting.css" download>
+                        <button>Download Workskin</button>
+                    </a>
+                </div>
             </div>
 
         </main>
@@ -104,7 +107,6 @@
     <script src="js/loadComponents.js"></script>
     <script src="js/database.js"></script>
     <script src="js/account_database.js"></script>
-
 </body>
 
 </html>

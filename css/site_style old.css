@@ -151,58 +151,137 @@ body {
 
 
 
-/* ---------- Database Cards & Layout ---------- */
 
-/* Card container for sections */
-.card-section {
-    background-color: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
+/* ---------- Database Things ---------- */
 
-/* Account DB cards */
-.account-card {
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    padding: 15px 20px;
-    margin-top: 15px;
-}
-
-/* File preview box */
+/* File preview display */
 .file-preview {
     font-size: 0.95em;
     color: #555;
-    margin: 10px 0;
+    margin-bottom: 5px;
     font-style: italic;
-    padding: 8px 12px;
-    background-color: #f0f0f0;
-    border-radius: 6px;
-    border: 1px solid #ddd;
 }
 
-/* File actions buttons */
-.file-actions {
+
+
+
+
+/* ---------- Builder & Preview Panels ---------- */
+.builder-preview-container {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Builder panel (left) */
+.builder-preview-container .builder_panel {
+    flex: 1;
+    /* half of container */
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Preview panel (right) */
+.builder-preview-container .preview_panel {
+    flex: 1;
+    /* half of container */
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-height: 90vh;
+    overflow: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .builder-preview-container {
+        flex-direction: column;
+    }
+
+    .builder-preview-container .builder_panel,
+    .builder-preview-container .preview_panel {
+        flex: unset;
+        width: 100%;
+    }
+}
+
+/* ---------- Inputs & Textareas in Builder Panel ---------- */
+.builder_panel input,
+.builder_panel select,
+.builder_panel textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.builder_panel input:focus,
+.builder_panel select:focus,
+.builder_panel textarea:focus {
+    border-color: #1DA1F2;
+    box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.2);
+    outline: none;
+}
+
+/* ---------- Buttons in Builder Panel ---------- */
+.builder_panel button {
+    background-color: #1DA1F2;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
     margin-top: 5px;
 }
 
-/* Disabled buttons styling */
-button:disabled {
-    opacity: 0.5;
+.builder_panel button:hover {
+    background-color: #0d8ddb;
+    transform: translateY(-1px);
+}
+
+.builder_panel button:disabled {
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* Headings spacing */
-h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
+/* ---------- Stats Row (Builder Panel) ---------- */
+.builder_panel .stats-row {
+    display: flex;
+    gap: 10px;
 }
 
-h3 {
-    margin-top: 0;
-    margin-bottom: 5px;
+.builder_panel .stats-row div {
+    flex: 1;
+}
+
+/* ---------- Replies (Builder Panel) ---------- */
+.builder_panel .reply {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.builder_panel .reply input,
+.builder_panel .reply textarea {
+    margin-bottom: 8px;
+}
+
+/* ---------- Output textarea (Builder Panel) ---------- */
+.builder_panel #output {
+    font-family: monospace;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
+    resize: vertical;
 }

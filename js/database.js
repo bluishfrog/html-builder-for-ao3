@@ -1,9 +1,22 @@
 // ---------------- Main Document ----------------
 let mainFileHandle = null;
 
-// Update the preview of selected file
+// Update the preview of selected file and manage download button
 function updateFilePreview(spanId, name) {
     document.getElementById(spanId).textContent = name || "No file selected";
+
+    // Enable/disable the corresponding download button
+    switch (spanId) {
+        case "mainFilePreview":
+            document.getElementById("downloadMainBtn").disabled = !name;
+            break;
+        case "twitterFilePreview":
+            document.getElementById("downloadTwitterBtn").disabled = !name;
+            break;
+        case "tumblrFilePreview":
+            document.getElementById("downloadTumblrBtn").disabled = !name;
+            break;
+    }
 }
 
 // Open existing main file
@@ -15,7 +28,6 @@ async function openMainFile() {
         });
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
-        document.getElementById("downloadMainBtn").disabled = false;
     } catch (err) {
         console.log("Open cancelled or failed:", err);
     }
@@ -34,16 +46,16 @@ async function createNewMainFile() {
         await writable.close();
 
         updateFilePreview("mainFilePreview", mainFileHandle.name);
-        document.getElementById("downloadMainBtn").disabled = false;
     } catch (err) {
         console.log("Creation cancelled or failed:", err);
     }
 }
 
-// Download main file
+// Download main file (from localStorage content)
 async function downloadMainFile() {
     try {
-        const blob = new Blob([localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->"], { type: "text/html" });
+        const content = localStorage.getItem("loadedHTML") || "<!-- Placeholder content -->";
+        const blob = new Blob([content], { type: "text/html" });
         const url = URL.createObjectURL(blob);
 
         const a = document.createElement("a");
@@ -68,9 +80,8 @@ async function openTwitterDB() {
         });
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
-        document.getElementById("downloadTwitterBtn").disabled = false;
     } catch (err) {
-        console.log(err);
+        console.log("Open cancelled or failed:", err);
     }
 }
 
@@ -86,9 +97,9 @@ async function createNewTwitterDB() {
         await writable.close();
 
         updateFilePreview("twitterFilePreview", twitterDBHandle.name);
-        document.getElementById("downloadTwitterBtn").disabled = false;
+        localStorage.setItem("twitterDB", "<!-- Empty Twitter DB -->");
     } catch (err) {
-        console.log(err);
+        console.log("Creation cancelled or failed:", err);
     }
 }
 
@@ -98,7 +109,6 @@ async function loadTwitterTest() {
         const text = await res.text();
         localStorage.setItem("twitterDB", text);
         updateFilePreview("twitterFilePreview", "Test Twitter DB");
-        document.getElementById("downloadTwitterBtn").disabled = false;
     } catch (err) {
         console.log("Failed to load Twitter test DB:", err);
     }
@@ -132,9 +142,8 @@ async function openTumblrDB() {
         });
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
-        document.getElementById("downloadTumblrBtn").disabled = false;
     } catch (err) {
-        console.log(err);
+        console.log("Open cancelled or failed:", err);
     }
 }
 
@@ -150,9 +159,9 @@ async function createNewTumblrDB() {
         await writable.close();
 
         updateFilePreview("tumblrFilePreview", tumblrDBHandle.name);
-        document.getElementById("downloadTumblrBtn").disabled = false;
+        localStorage.setItem("tumblrDB", "<!-- Empty Tumblr DB -->");
     } catch (err) {
-        console.log(err);
+        console.log("Creation cancelled or failed:", err);
     }
 }
 
@@ -162,7 +171,6 @@ async function loadTumblrTest() {
         const text = await res.text();
         localStorage.setItem("tumblrDB", text);
         updateFilePreview("tumblrFilePreview", "Test Tumblr DB");
-        document.getElementById("downloadTumblrBtn").disabled = false;
     } catch (err) {
         console.log("Failed to load Tumblr test DB:", err);
     }

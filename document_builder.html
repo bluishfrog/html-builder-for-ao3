@@ -46,8 +46,17 @@
     <div class="main-container">
 
         <!-- LEFT: EDITOR -->
-        <div class="panel editor-panel">
-            <h2>Editor</h2>
+        <div class="panel builder-panel">
+            <h2>Builder</h2>
+
+            <h3>Create New Post</h3>
+            <div class="posttype_selection">
+                <div id="twitterpost"></div>
+                <button onclick="addTwitterPost()">+ Add Twitter Post</button>
+                <div id="tumblrpost"></div>
+                <button onclick="addTumblrPost()">+ Add Tumblr Post</button>
+            </div>
+
 
             <!-- Account selection -->
             <h3>Select Account</h3>
@@ -69,15 +78,15 @@
             <div class="stats-row">
                 <div>
                     <label>Retweets</label>
-                    <input id="retweets" type="number">
+                    <input id="retweets" placeholder=56 type="number">
                 </div>
                 <div>
                     <label>Quotes</label>
-                    <input id="quotes" type="number">
+                    <input id="quotes" placeholder=11 type="number">
                 </div>
                 <div>
                     <label>Likes</label>
-                    <input id="likes" type="number">
+                    <input id="likes" placeholder=271 type="number">
                 </div>
             </div>
 

@@ -180,26 +180,33 @@ body {
 }
 
 /* ---------- File Preview ---------- */
-.account-cards-container .file-preview {
+/* File preview inside main container card (original style) */
+.card-section .file-preview {
     font-size: 0.95em;
     color: #555;
     font-style: italic;
     padding: 8px 12px;
     background-color: #f0f8ff;
+    /* light blue */
     margin-bottom: 10px;
     border-radius: 4px;
+    border-left: 4px solid #C9F2FF;
+    /* keep left border only for main doc previews */
 }
 
-.account-cards .file-preview {
+/* File preview inside account cards (Twitter/Tumblr) */
+.account-cards-container .file-preview {
     font-size: 0.95em;
     color: #555;
     font-style: italic;
     padding: 8px 12px;
     background-color: #ffffff;
+    /* white */
     margin-bottom: 10px;
     border-radius: 4px;
+    border-left: none;
+    /* no left border here */
 }
-
 
 /* ---------- File Actions & Buttons ---------- */
 .file-actions {

@@ -6,6 +6,7 @@ function loadComponent(id, file) {
         });
 }
 
-// Load nav
+// compontents
 loadComponent("nav-placeholder", "components/nav.html");
 loadComponent("footer-placeholder", "components/footer.html");
+loadComponent("head-placeholder", "components/head.html");

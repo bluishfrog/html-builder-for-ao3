@@ -1,24 +1,25 @@
 <style>
-/* Contain floats inside #workskin only, no global resets */
-#workskin::after {
-  content: "";
-  display: table;
-  clear: both;
-}
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f8f8f8;
+        /* like AO3 background */
+    }
 
-/* Prevent preview wrapper from adding extra spacing */
-#preview-root {
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-  width: auto;
-}
+    #preview-root {
+        width: 780px;
+        /* AO3 content width */
+        margin: 0 auto;
+        /* center it */
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-/* Fix line breaks around replies without touching negative margins */
-#workskin hr.twt-sep,
-#workskin hr.twt-sep-reply {
-  display: block;
-  margin-top: 0;    /* AO3 already handles spacing */
-  margin-bottom: 0;
-}
+    /* Contain floats inside #workskin without altering AO3 CSS */
+    #workskin::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 </style>

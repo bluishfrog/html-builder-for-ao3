@@ -12,12 +12,12 @@
     @import url("ao3/5_site_narrow.handheld_.css") screen and (max-width: 42em);
     @import url("ao3/6_site_speech_.css") speech;
     @import url("ao3/7_site_print_.css") print;
-
-    /* Workskin CSS overrides AO3 base */
-    @import url("css/workskin_orig.css") layer(workskin);
   </style>
 
-  <script src="js/loadComponents.js"></script>
+  <!-- Workskin loaded AFTER AO3 base -->
+  <link rel="stylesheet" href="css/workskin_orig.css">
+
+
 </head>
 
 <body>

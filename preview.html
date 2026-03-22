@@ -4,28 +4,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Preview</title>
-  <link rel="stylesheet" href="css/worksin_2026_blusHTMLBuilder.css">
-  
+  <link rel="stylesheet" href="css/workskin_orig.css">
+
+  <link rel="stylesheet" href="css/workskin_orig.css">
+
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
+    /* Normalize spacing for injected AO3 content */
+    #workskin .twt,
+    #workskin .twt-replybox,
+    #workskin .twt-quotebox {
+      overflow: hidden;
+      /* contain floats */
     }
 
-    body {
-      overflow-x: hidden;
+    #workskin .twt+.twt,
+    #workskin .twt-replybox+.twt-replybox {
+      margin-top: 1em;
+      /* consistent spacing between tweets/replies */
     }
 
-    /* Wrapper to contain floats and negative margins */
-    #preview-root {
-      width: 100%;
-      max-width: 100%;
+    #workskin .twt-content,
+    #workskin .twt-replycontent,
+    #workskin .t_line,
+    #workskin .t_ask,
+    #workskin .reblogtext {
+      margin-top: 0.3em;
+      margin-bottom: 0.3em;
+      /* normalize spacing */
+    }
+
+    #workskin .twt-timestamp,
+    #workskin .twt-stat1,
+    #workskin .twt-stat2 {
       display: block;
-      overflow: auto; /* contain floats */
-      padding: 0;
-      margin: 0;
+      line-height: 1.2em;
+      /* tighten vertical spacing */
     }
   </style>
 </head>

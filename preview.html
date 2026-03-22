@@ -9,38 +9,104 @@
   <link rel="stylesheet" href="css/workskin_orig.css">
 
   <style>
-    /* Normalize spacing for injected AO3 content */
-    #workskin .twt,
-    #workskin .twt-replybox,
-    #workskin .twt-quotebox {
-      overflow: hidden;
+    /* Ensure the preview container uses the full width and contains floats */
+    #preview-root {
+      width: 100%;
+      max-width: 100%;
+      overflow: auto;
       /* contain floats */
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
     }
 
+    /* Reset margins/padding on body to match AO3 display */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    /* Workskin container */
+    #workskin {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Ensure floats inside tweets are properly cleared */
+    #workskin .twt,
+    #workskin .twt-replybox,
+    #workskin .twt-quotebox,
+    #workskin .t_body,
+    #workskin .t_chat,
+    #workskin .t_ask,
+    #workskin .reblogorigin {
+      overflow: hidden;
+      /* contain left/right floats */
+    }
+
+    /* Normalize spacing to match AO3 */
     #workskin .twt+.twt,
-    #workskin .twt-replybox+.twt-replybox {
-      margin-top: 1em;
-      /* consistent spacing between tweets/replies */
+    #workskin .twt-replybox+.twt-replybox,
+    #workskin .twt-quotebox+.twt-quotebox {
+      margin-top: 0.5em;
     }
 
     #workskin .twt-content,
+    #workskin .twt-contentquote,
     #workskin .twt-replycontent,
     #workskin .t_line,
-    #workskin .t_ask,
-    #workskin .reblogtext {
-      margin-top: 0.3em;
-      margin-bottom: 0.3em;
-      /* normalize spacing */
+    #workskin .t_text,
+    #workskin .t_h,
+    #workskin .reblogtext,
+    #workskin .t_ask {
+      margin-top: 0;
+      /* Remove extra spacing added by preview browser */
+      margin-bottom: 0;
     }
 
+    /* Keep line heights tight like AO3 */
+    #workskin .t_line,
+    #workskin .t_chat,
+    #workskin .t_ask,
+    #workskin .t_text,
+    #workskin .reblogtext {
+      line-height: normal;
+      /* AO3 uses slightly tighter lines */
+    }
+
+    /* Images inside tweets and quote retweets */
+    #workskin .t_img,
+    #workskin .twt-image {
+      display: block;
+      margin: 0 auto;
+      /* center images */
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Quote tweets spacing fix */
+    #workskin .twt-quotebox {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+    /* Ensure timestamps, stats, and handles don't collapse */
     #workskin .twt-timestamp,
     #workskin .twt-stat1,
-    #workskin .twt-stat2 {
-      display: block;
-      line-height: 1.2em;
-      /* tighten vertical spacing */
+    #workskin .twt-stat2,
+    #workskin .twt-handle {
+      display: inline-block;
+    }
+
+    /* Prevent unnecessary extra spacing from preview container */
+    #preview-root * {
+      box-sizing: border-box;
     }
   </style>
+
 </head>
 
 <body>

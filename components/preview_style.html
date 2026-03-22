@@ -1,108 +1,24 @@
 <style>
-    /* Ensure preview wrapper behaves like AO3 body */
-    #preview-root {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: visible;
-        box-sizing: border-box;
-    }
+/* Contain floats inside #workskin only, no global resets */
+#workskin::after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-    /* Contain all floats inside tweets and quote tweets */
-    #workskin .twt,
-    #workskin .twt-replybox,
-    #workskin .twt-quotebox,
-    #workskin .t_body,
-    #workskin .t_ask,
-    #workskin .t_chat,
-    #workskin .reblogorigin {
-        overflow: hidden;
-        /* keeps floated icons inside */
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+/* Prevent preview wrapper from adding extra spacing */
+#preview-root {
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  width: auto;
+}
 
-    /* Correct spacing inside main tweet content */
-    #workskin .twt-content,
-    #workskin .twt-contentquote,
-    #workskin .t_text,
-    #workskin .t_h,
-    #workskin .reblogtext {
-        display: block;
-        margin-top: 0.2em;
-        /* small spacing like AO3 */
-        margin-bottom: 0.2em;
-        line-height: 1.4;
-        /* matches AO3 spacing */
-    }
-
-    /* Fix lines between replies and quote retweets */
-    #workskin hr.twt-sep,
-    #workskin hr.twt-sep-reply {
-        display: block;
-        margin: 1em 0 0.5em 0;
-        /* AO3 uses tiny vertical spacing */
-        padding: 0;
-        border: none;
-        height: 1px;
-        background-color: #e6e6e6;
-    }
-
-    #workskin hr.twt-sep-reply {
-        margin-left: 0;
-        padding-right: 0;
-        width: 100%;
-    }
-
-    /* Quote tweet box adjustments */
-    #workskin .twt-quotebox {
-        margin: 0.5em 0 0.5em 0;
-        padding: 10px;
-        overflow: hidden;
-        border-radius: 10px;
-        border: 1px solid #c7c7c7;
-    }
-
-    /* Images inside tweets & quotes */
-    #workskin .twt-image,
-    #workskin .t_img {
-        display: block;
-        margin: 0.5em auto;
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-        border: 1px solid #c7c7c7;
-    }
-
-    /* Reply spacing fixes */
-    #workskin .twt-replybox {
-        margin-top: 0.5em;
-        /* small AO3 spacing */
-        margin-bottom: 0.5em;
-    }
-
-    /* Inline-block handles and timestamps */
-    #workskin .twt-timestamp,
-    #workskin .twt-handle,
-    #workskin .twt-stat1,
-    #workskin .twt-stat2 {
-        display: inline-block;
-        line-height: 1.2em;
-    }
-
-    /* Contain floats globally to prevent extra spacing in preview */
-    #workskin *::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    /* Normalize general box-sizing and remove extra preview spacing */
-    #workskin,
-    #workskin * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+/* Fix line breaks around replies without touching negative margins */
+#workskin hr.twt-sep,
+#workskin hr.twt-sep-reply {
+  display: block;
+  margin-top: 0;    /* AO3 already handles spacing */
+  margin-bottom: 0;
+}
 </style>

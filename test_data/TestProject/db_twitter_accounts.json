@@ -1,0 +1,12 @@
+[
+    {
+        "handle": "@alice",
+        "name": "Alice Example",
+        "icon": "https://example.com/icons/alice.png"
+    },
+    {
+        "handle": "@bob",
+        "name": "Bob Example",
+        "icon": "https://example.com/icons/bob.png"
+    }
+]

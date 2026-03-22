@@ -1,0 +1,12 @@
+[
+    {
+        "url": "@aliceblog",
+        "name": "Alice Blog",
+        "icon": "https://example.com/icons/aliceblog.png"
+    },
+    {
+        "url": "@bobblog",
+        "name": "Bob Blog",
+        "icon": "https://example.com/icons/bobblog.png"
+    }
+]

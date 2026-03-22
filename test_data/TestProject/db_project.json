@@ -1,0 +1,22 @@
+[
+    {
+        "type": "twitter",
+        "author": "alice",
+        "timestamp": "2026-03-22T14:57:00Z",
+        "content": {
+            "text": "Hello World",
+            "quoted": null,
+            "tags": [
+                "damn a tag",
+                "can't believe this is another tag"
+            ],
+            "media": "https://media.tenor.com/Teq-XDUYFg8AAAAC/hello-cat.gif"
+        },
+        "stats": {
+            "retweets": 56,
+            "quote_retweets": 11,
+            "likes": 271
+        },
+        "replies": null
+    }
+]

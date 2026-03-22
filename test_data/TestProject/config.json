@@ -1,0 +1,7 @@
+{
+    "projectDB": "db_project.json",
+    "twitterDB": "db_twitter_accounts.json",
+    "tumblrDB": "db_tumblr_accounts.json",
+    "outputHTML": "output.html",
+    "workskin": "worksin_2026_blusHTMLBuilder.css"
+}

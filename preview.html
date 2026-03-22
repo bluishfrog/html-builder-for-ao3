@@ -11,9 +11,6 @@
   <link rel="stylesheet" href="css/ao3/5_site_narrow.handheld_.css" media="only screen and (max-width: 42em)">
   <link rel="stylesheet" href="css/ao3/6_site_speech_.css" media="speech">
   <link rel="stylesheet" href="css/ao3/7_site_print_.css" media="print">
-
-  <!-- Workskin loaded AFTER AO3 base -->
-  <link rel="stylesheet" href="css/workskin_orig.css">
 </head>
 
 <body>
@@ -26,26 +23,61 @@
         return response.text();
       })
       .then(html => {
-        // Parse the fetched HTML
+        // Parse fetched HTML
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Get the body content or fallback to all content
-        const bodyContent = doc.body && doc.body.innerHTML.trim() !== ''
-          ? doc.body.innerHTML
-          : doc.documentElement.innerHTML;
+        // Get body content or fallback to all HTML
+        const bodyContent = doc.body && doc.body.innerHTML.trim() !== '' 
+                            ? doc.body.innerHTML 
+                            : doc.documentElement.innerHTML;
 
-        // Clear existing body content
+        // Clear current body content
         document.body.innerHTML = '';
 
-        // Create a temporary container to hold the fetched HTML
+        // Create a temporary container to manipulate content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = bodyContent;
+
+        // Base URL for resolving relative paths
+        const baseUrl = new URL(previewPath, window.location.href);
+
+        // Fix relative paths for images
+        tempDiv.querySelectorAll('img').forEach(img => {
+          if (img.getAttribute('src') && !img.src.startsWith('http') && !img.src.startsWith('data:')) {
+            img.src = new URL(img.getAttribute('src'), baseUrl).href;
+          }
+        });
+
+        // Fix relative paths for links
+        tempDiv.querySelectorAll('a').forEach(a => {
+          if (a.getAttribute('href') && !a.href.startsWith('http') && !a.href.startsWith('#')) {
+            a.href = new URL(a.getAttribute('href'), baseUrl).href;
+          }
+        });
+
+        // Fix background images in inline styles
+        tempDiv.querySelectorAll('*').forEach(el => {
+          const bg = el.style.backgroundImage;
+          if (bg && bg.includes('url(')) {
+            el.style.backgroundImage = bg.replace(/url\(["']?(.+?)["']?\)/g, (match, p1) => {
+              if (p1.startsWith('http') || p1.startsWith('data:')) return `url(${p1})`;
+              return `url(${new URL(p1, baseUrl).href})`;
+            });
+          }
+        });
 
         // Move all children to the real body
         while (tempDiv.firstChild) {
           document.body.appendChild(tempDiv.firstChild);
         }
+
+        // Finally, append Workskin CSS AFTER content
+        const workskinLink = document.createElement('link');
+        workskinLink.rel = 'stylesheet';
+        workskinLink.href = 'css/workskin_orig.css';
+        document.head.appendChild(workskinLink);
+
       })
       .catch(err => {
         console.error('Error loading preview:', err);

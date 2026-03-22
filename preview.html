@@ -17,8 +17,6 @@
 </head>
 
 <body>
-  <div id="preview-container"></div>
-
   <script>
     const previewPath = 'test_data/TestProject/output.html';
 
@@ -32,15 +30,26 @@
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Get only the body content
-        const bodyContent = doc.body.innerHTML;
+        // Get the body content or fallback to all content
+        const bodyContent = doc.body && doc.body.innerHTML.trim() !== ''
+          ? doc.body.innerHTML
+          : doc.documentElement.innerHTML;
 
-        // Inject it into the container
-        document.getElementById('preview-container').innerHTML = bodyContent;
+        // Clear existing body content
+        document.body.innerHTML = '';
+
+        // Create a temporary container to hold the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = bodyContent;
+
+        // Move all children to the real body
+        while (tempDiv.firstChild) {
+          document.body.appendChild(tempDiv.firstChild);
+        }
       })
       .catch(err => {
         console.error('Error loading preview:', err);
-        document.getElementById('preview-container').innerHTML = '<p style="color:red;">Failed to load preview.</p>';
+        document.body.innerHTML = '<p style="color:red;">Failed to load preview.</p>';
       });
   </script>
 </body>

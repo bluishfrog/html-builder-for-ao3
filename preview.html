@@ -17,14 +17,26 @@
 </head>
 
 <body>
-  <div id="preview-root"></div>
+  <div id="preview-container"></div>
 
   <script>
-    fetch('test_data/TestProject/output.html')
-      .then(response => response.text())
+    // Path to the HTML file you want to preview
+    const previewPath = 'test_data/TestProject/output.html';
+
+    // Fetch the HTML content
+    fetch(previewPath)
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to load preview HTML');
+        return response.text();
+      })
+      .then(html => {
+        // Inject the fetched HTML into the container
+        const container = document.getElementById('preview-container');
+        container.innerHTML = html;        
+      })
       .catch(err => {
-        document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
-        console.error(err);
+        console.error('Error loading preview:', err);
+        document.getElementById('preview-container').innerHTML = '<p style="color:red;">Failed to load preview.</p>';
       });
   </script>
 </body>

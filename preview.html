@@ -5,21 +5,15 @@
   <meta charset="UTF-8">
   <title>Preview</title>
 
-  <style>
-    /* AO3 base CSS layer */
-    @layer base {
-      @import url("ao3/1_site_screen_.css");
-      @import url("ao3/4_site_midsize.handheld_.css") screen and (max-width: 62em);
-      @import url("ao3/5_site_narrow.handheld_.css") screen and (max-width: 42em);
-      @import url("ao3/6_site_speech_.css") speech;
-      @import url("ao3/7_site_print_.css") print;
-    }
+  <!-- AO3 base CSS first -->
+  <link rel="stylesheet" href="ao3/1_site_screen_.css">
+  <link rel="stylesheet" href="ao3/4_site_midsize.handheld_.css" media="only screen and (max-width: 62em)">
+  <link rel="stylesheet" href="ao3/5_site_narrow.handheld_.css" media="only screen and (max-width: 42em)">
+  <link rel="stylesheet" href="ao3/6_site_speech_.css" media="speech">
+  <link rel="stylesheet" href="ao3/7_site_print_.css" media="print">
 
-    /* Workskin layer overrides base */
-    @layer workskin {
-      @import url("css/workskin_orig.css");
-    }
-  </style>
+  <!-- Workskin loaded AFTER AO3 base -->
+  <link rel="stylesheet" href="css/workskin_orig.css">
 </head>
 
 <body>

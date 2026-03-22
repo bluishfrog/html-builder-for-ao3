@@ -22,10 +22,6 @@
   <script>
     fetch('test_data/TestProject/output.html')
       .then(response => response.text())
-      .then(html => {
-        // Wrap the content in #work so AO3 CSS applies
-        document.getElementById('preview-root').innerHTML = `<div id="work">${html}</div>`;
-      })
       .catch(err => {
         document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
         console.error(err);

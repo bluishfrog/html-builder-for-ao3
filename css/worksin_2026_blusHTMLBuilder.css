@@ -1,66 +1,49 @@
-/* ---------- Workskin Wrapper ---------- */
-#workskin {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-  max-width: 540px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 0 20px;
-}
-
-/* ---------- Tweet / Post Container ---------- */
 #workskin .twt {
-  display: flex;
-  flex-direction: column;
   max-width: 450px;
   min-width: 300px;
-  margin: 1em auto;
+  margin: 0 auto;
   padding: 0 20px;
   border: 1px solid #c7c7c7;
   border-radius: 10px;
-  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  float: none; /* float:center is invalid, handled by margin auto */
 }
 
-/* ---------- Header ---------- */
 #workskin .twt-header {
-  display: flex;
-  gap: 0.75em;
-  margin-bottom: 0.5em;
-  align-items: flex-start;
+  overflow: hidden;
+  margin-bottom: -3em;
 }
 
-#workskin .twt-icon-container {
-  flex-shrink: 0;
-}
-
-#workskin .twt-icon,
-#workskin .twt-iconquote {
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+#workskin .twt-icon-container,
+#workskin .twt-icon-replycontainer {
+  float: left;
 }
 
 #workskin .twt-icon {
   width: 3.5em;
   height: 3.5em;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 #workskin .twt-iconquote {
   width: 2em;
   height: 2em;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 #workskin .twt-id {
   font-size: 1em;
   padding-left: 1em;
   overflow: hidden;
-  flex: 1;
 }
 
 #workskin .twt-name {
   font-weight: bold;
 }
-
 #workskin .twt-name:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -69,124 +52,258 @@
 #workskin .twt-handle {
   color: #657786;
 }
-
 #workskin .twt-handle:hover {
   cursor: pointer;
 }
 
-/* ---------- Content ---------- */
 #workskin .twt-content {
   font-size: 1.3em;
-  margin-bottom: 0.5em;
-  line-height: 1.4;
+  margin-bottom: -1em;
 }
 
 #workskin .twt-contentquote {
+  margin-top: -1em;
   font-size: 1em;
-  margin-top: 0.25em;
 }
 
 #workskin .twt-timestamp {
-  font-size: 1em;
   color: #657786;
+  font-size: 1em;
 }
 
-/* ---------- Separators ---------- */
 #workskin hr.twt-sep,
 #workskin hr.twt-sep-reply {
   border: none;
   height: 1px;
   width: 100%;
   background-color: #e6e6e6;
-  margin: 0.5em 0;
 }
-
 #workskin hr.twt-sep-reply {
+  margin-left: -20px;
   padding-right: 40px;
 }
 
-/* ---------- Stats ---------- */
-#workskin .twt-stat1,
-#workskin .twt-stat2 {
-  font-size: 0.9em;
+#workskin .twt-stat1 {
   color: #657786;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2em;
-  margin-top: 0.25em;
+  font-size: 0.9em;
 }
 
-#workskin .twt-social {
-  display: flex;
-  align-items: center;
-  gap: 0.25em;
+#workskin .twt-quotebox,
+#workskin .twt-image {
+  border: 1px solid #c7c7c7;
+  border-radius: 10px;
+  margin-bottom: -1em;
 }
 
-#workskin .twt-socialimg {
-  height: 13px;
+#workskin .twt-image {
+  max-width: 100%;
+  float: none; /* float:center replaced */
 }
 
-/* ---------- Replies ---------- */
 #workskin .twt-replybox {
-  display: flex;
-  gap: 0.75em;
-  margin-top: 0.5em;
-}
-
-#workskin .twt-icon-replycontainer {
-  flex-shrink: 0;
+  margin-top: -2em;
 }
 
 #workskin .twt-replycontainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25em;
+  padding-left: 1em;
   overflow: hidden;
 }
 
 #workskin .twt-replycontent {
-  margin-top: 0;
+  margin-top: -1em;
 }
 
-/* ---------- Quotes, Asks, Chats ---------- */
-#workskin .t_quote,
-#workskin .t_ask,
-#workskin .t_chat {
+#workskin .twt-stat2 {
+  color: #657786;
+  font-size: 0.9em;
+  margin-top: -1em;
+}
+
+#workskin .twt-social {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: -1em;
+}
+
+#workskin .twt-socialimg {
+  height: 13px;
+  margin-right: 3px;
+}
+
+#workskin .twt-hl {
+  color: #1DA1F2;
+}
+#workskin .twt-hl:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Tumblr-specific blocks */
+#workskin .t_ {
+  max-width: 540px;
+  font-family: Gibson, Helvetica Neue, HelveticaNeue, Helvetica, Arial, sans-serif;
+  display: table;
+  margin: auto;
+  color: #444;
+  box-sizing: border-box;
+}
+
+#workskin .t_body {
+  background-color: #fff;
+  border-radius: 3px;
+  border: 0.1em solid #ddd;
+  float: left;
+  position: relative;
+  padding: 15px 0 0;
+  width: 540px;
+}
+
+#workskin .t_url,
+#workskin .t_photourl {
+  position: relative;
+  top: -0.2em;
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 20px;
+  line-height: 20px;
+  height: 20px;
+}
+
+#workskin .t_photourl {
   display: block;
-  margin: 0.75em 0;
+}
+
+#workskin .t_text {
+  display: inline-block;
+  margin: 15px 0 0 20px;
+  line-height: 21px;
+  font-size: 14px;
+  width: 92%;
   word-wrap: break-word;
 }
 
-#workskin .t_quote {
-  font-family: Georgia, serif;
+#workskin .t_text a {
+  color: #444;
+}
+
+#workskin .t_h {
+  display: inline-block;
+  margin-left: 20px;
+  font-weight: 400;
   font-size: 36px;
+  line-height: 47px;
+  width: 92%;
+  word-wrap: break-word;
+}
+
+#workskin .t_tags {
+  display: inline-block;
+  width: 92%;
+  font-size: 13px;
+  color: #8f8f8f;
+  margin: 15px 0 0 20px;
+  line-height: 20px;
+  position: relative;
+}
+
+#workskin .t_tag {
+  margin-left: 12px;
+}
+#workskin .t_tag:first-of-type {
+  margin-left: 0;
+}
+
+#workskin .t_notes {
+  font-size: 14px;
+  font-weight: bold;
+  color: #8f8f8f;
+  line-height: 45px;
+  margin-left: 20px !important;
+  display: inline-block;
+}
+
+#workskin .t_icons {
+  height: 45px;
+  float: right;
+  margin-right: 10px;
+}
+
+#workskin .t_one {
+  width: 540px;
+  margin: 4px 0 0 0;
+  vertical-align: top;
+}
+
+#workskin .t_img {
+  max-width: 100%;
+  height: auto;
+}
+
+#workskin .t_two,
+#workskin .t_three {
+  display: inline-block;
+  margin: 4px 0 0 4px;
+  vertical-align: top;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+#workskin .t_two {
+  width: 268px;
+  height: 177px;
+}
+#workskin .t_three {
+  width: 177px;
+  height: 120px;
+}
+
+#workskin .portrait { height: 412px; }
+#workskin .short { height: 50px; }
+
+#workskin .left { margin-left: 0 !important; float: left; }
+#workskin .right { float: right; }
+#workskin .mid { width: 178px !important; }
+
+#workskin .t_quote {
+  display: inline-block;
+  margin: 15px 0 1px 35px;
   line-height: 42px;
-  text-indent: -15px;
+  font-size: 36px;
   width: 89%;
-  margin-left: 35px;
+  word-wrap: break-word;
+  font-family: Georgia, serif;
+  text-indent: -15px;
 }
+#workskin .t_quote:before { content: "\201C"; }
+#workskin .t_quote:after { content: "\201D"; }
 
-#workskin .t_quote:before {
-  content: "\201C";
-}
-
-#workskin .t_quote:after {
-  content: "\201D";
+#workskin .quotesourcedash { width: 20px; margin-left: 20px; }
+#workskin .quotesource {
+  display: inline-block;
+  margin-bottom: 15px;
+  line-height: 21px;
+  font-size: 14px;
+  width: 90%;
+  word-wrap: break-word;
 }
 
 #workskin .t_ask {
+  display: inline-block;
+  float: left;
   background-color: #f2f2f2;
   border: 1px solid #f2f2f2;
   border-radius: 3px;
   padding: 15px 14px 18px;
-  width: 80%;
   margin-top: 15px;
   margin-left: 20px;
+  font-size: 14px;
+  line-height: 21px;
+  width: 80%;
+  word-wrap: break-word;
   position: relative;
 }
 
 #workskin .t_asktip {
+  display: inline;
   position: absolute;
   width: 0;
   height: 0;
@@ -202,173 +319,50 @@
   float: right;
   height: 37px;
   width: 37px;
-  border-radius: 2px;
   margin-top: 15px;
   margin-right: 15px;
+  border-radius: 2px;
 }
 
 #workskin .t_asker {
+  color: #a6a6a6;
+  font-size: 13px;
   display: inline-block;
   width: 100%;
-  font-size: 13px;
-  color: #a6a6a6;
   line-height: 21px;
   margin-bottom: 7px;
 }
 
 #workskin .t_chat {
   display: inline-block;
-  width: 92%;
   font-size: 14px;
+  width: 92%;
   line-height: 1.4;
   font-family: Courier, monospace;
-  padding-left: 3px;
-  padding-top: 3px;
-  margin-top: 15px;
-  margin-left: 20px;
-}
-
-/* ---------- Text & Headings ---------- */
-#workskin .t_text,
-#workskin .t_h,
-#workskin .t_tags,
-#workskin .t_notes,
-#workskin .reblogtext {
-  word-wrap: break-word;
-  display: inline-block;
-}
-
-#workskin .t_text {
-  margin-top: 15px;
-  margin-left: 20px;
-  line-height: 21px;
-  font-size: 14px;
-  width: 92%;
-}
-
-#workskin .t_h {
-  font-size: 36px;
-  font-weight: 400;
-  line-height: 47px;
-  width: 92%;
-  margin-left: 20px;
-}
-
-#workskin .t_tags {
-  font-size: 13px;
-  color: #8f8f8f;
-  margin-top: 15px;
-  width: 92%;
-  margin-left: 20px;
-}
-
-#workskin .t_notes {
-  font-size: 14px;
-  font-weight: bold;
-  color: #8f8f8f;
-  line-height: 45px;
-  margin-left: 20px !important;
-}
-
-/* ---------- Images ---------- */
-#workskin .t_img,
-#workskin .t_photourl,
-#workskin .t_two,
-#workskin .t_three {
-  max-width: 100%;
-  height: auto;
-  display: inline-block;
-  vertical-align: top;
-  margin: 4px 0 0 4px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-#workskin .t_two {
-  width: 268px;
-  height: 177px;
-}
-
-#workskin .t_three {
-  width: 177px;
-  height: 120px;
-}
-
-#workskin .portrait {
-  height: 412px;
-}
-
-#workskin .short {
-  height: 50px;
-}
-
-/* ---------- Helpers ---------- */
-#workskin .left {
-  float: left !important;
-  margin-left: 0 !important;
-}
-
-#workskin .right {
-  float: right;
-}
-
-#workskin .mid {
-  width: 178px !important;
-}
-
-#workskin .strong {
-  font-weight: 700;
+  padding: 3px 0 0 3px;
+  margin: 15px 0 0 20px;
 }
 
 #workskin .t_line {
   display: block;
+  width: 100%;
   padding: 6px 0;
-  width: 100%;
 }
+#workskin .t_line:first-of-type { padding-top: 0; }
+#workskin .t_line:last-of-type { padding-bottom: 0; }
+#workskin .t_line:nth-of-type(even) { background: #fdfdfd; }
 
-#workskin .t_line:first-of-type {
-  padding-top: 0;
-}
+#workskin .strong { font-weight: 700; }
+#workskin .t_line>strong:after { content: "\A0"; }
 
-#workskin .t_line:last-of-type {
-  padding-bottom: 0;
-}
-
-#workskin .t_line:nth-of-type(even) {
-  background: #fdfdfd;
-}
-
-#workskin .t_line>strong:after {
-  content: "\A0";
-}
-
-/* ---------- Reblogs ---------- */
-#workskin .reblogorigin {
-  width: 100%;
-  word-wrap: break-word;
-  padding: 20px 20px 15px;
-}
-
-#workskin .reblogtext {
-  display: inline-block;
-  margin-top: 10px;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  line-height: 21px;
-  font-size: 14px;
-  width: 92%;
-}
-
-#workskin .reblogtext a {
-  color: #444444;
-}
+#workskin .reblog { height: 15px; width: auto; }
 
 #workskin .reblogheader {
-  display: inline-block;
-  width: 96%;
+  position: relative;
   line-height: 25px;
-  padding-top: 15px;
-  padding-left: 20px;
+  padding: 15px 0 0 20px;
+  width: 96%;
+  display: inline-block;
   border-top: 1px solid #e7e7e7;
   margin-top: 5px;
 }
@@ -378,21 +372,25 @@
   top: -0.2em;
   font-weight: 700;
   font-size: 13px;
-  margin-top: 50px;
-  margin-bottom: 10px;
+  margin: 50px 0 10px 0;
   line-height: 25px;
   height: 25px;
   color: #8f8f8f;
 }
 
-#workskin .reblogicon,
-#workskin .sourceurl {
+#workskin .reblogicon { border-radius: 2px; width: 25px; height: 25px; vertical-align: baseline; }
+
+#workskin .sourceurl { position: relative; font-weight: 700; font-size: 13px; display: inline-block; vertical-align: top; }
+
+#workskin .reblogorigin { width: 100%; word-wrap: break-word; padding: 20px 20px 15px 0; }
+
+#workskin .reblogtext {
   display: inline-block;
+  margin: 10px 0 10px 20px;
+  line-height: 21px;
+  font-size: 14px;
+  width: 92%;
+  word-wrap: break-word;
 }
 
-#workskin .reblogicon {
-  width: 25px;
-  height: 25px;
-  border-radius: 2px;
-  vertical-align: baseline;
-}
+#workskin .reblogtext a { color: #444; }

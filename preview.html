@@ -20,19 +20,23 @@
   <div id="preview-container"></div>
 
   <script>
-    // Path to the HTML file you want to preview
     const previewPath = 'test_data/TestProject/output.html';
 
-    // Fetch the HTML content
     fetch(previewPath)
       .then(response => {
         if (!response.ok) throw new Error('Failed to load preview HTML');
         return response.text();
       })
       .then(html => {
-        // Inject the fetched HTML into the container
-        const container = document.getElementById('preview-container');
-        container.innerHTML = html;        
+        // Parse the fetched HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Get only the body content
+        const bodyContent = doc.body.innerHTML;
+
+        // Inject it into the container
+        document.getElementById('preview-container').innerHTML = bodyContent;
       })
       .catch(err => {
         console.error('Error loading preview:', err);

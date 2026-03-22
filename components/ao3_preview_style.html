@@ -1,9 +1,9 @@
 <style>
-/* Basic AO3 content container */
+/* AO3-like body and content */
 body {
     font-family: "Georgia", "Times New Roman", serif;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.7; /* slightly taller for AO3 readability */
     color: #333;
     background: #fff;
     margin: 0;
@@ -11,16 +11,17 @@ body {
 }
 
 #work {
-    max-width: 760px; /* AO3 default content width */
+    max-width: 760px;
     margin: 2em auto;
     padding: 0 1em;
 }
 
-/* Headings like AO3 */
+/* Headings */
 h2, h3 {
     font-family: "Georgia", "Times New Roman", serif;
     font-weight: normal;
-    margin: 1em 0 0.5em;
+    margin-top: 2em; /* more space before headers */
+    margin-bottom: 0.5em; /* smaller space after headers */
 }
 
 h2 {
@@ -33,7 +34,8 @@ h3 {
 
 /* Paragraphs */
 p {
-    margin: 0 0 1em;
+    margin-top: 0;
+    margin-bottom: 1em; /* AO3 has slightly larger spacing between paragraphs */
 }
 
 /* Links */
@@ -46,18 +48,18 @@ a:hover {
     text-decoration: none;
 }
 
-/* Blockquotes and quotes */
+/* Blockquotes */
 blockquote {
     border-left: 3px solid #ccc;
-    margin: 1em 0;
+    margin: 1.2em 0; /* a bit more spacing above and below */
     padding-left: 1em;
     color: #555;
     font-style: italic;
 }
 
-/* Footnotes / endnotes */
+/* Notes / footnotes */
 .notes {
-    font-size: 0.9em;
+    font-size: 0.85em;
     margin-top: 2em;
     border-top: 1px solid #ccc;
     padding-top: 1em;
@@ -68,12 +70,20 @@ ul, ol {
     margin: 0 0 1em 2em;
 }
 
-/* Images inside content */
+/* Images */
 #work img {
     max-width: 100%;
     height: auto;
+    margin: 1em 0; /* spacing around images like AO3 */
 }
 
-/* Ensure workskin CSS can override */
+/* Horizontal rules */
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 2em 0;
+}
+
+/* Allow workskin CSS to override */
 @layer workskin {}
 </style>

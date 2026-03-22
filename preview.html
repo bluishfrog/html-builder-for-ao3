@@ -4,13 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Preview</title>
-  <link rel="stylesheet" href="css/workskin_orig.css">
 
-  <div id="preview-ao3-style-placeholder"></div>
+  <style>
+    /* AO3 base CSS */
+    @import url("ao3/1_site_screen_.css");
+    @import url("ao3/4_site_midsize.handheld_.css") screen and (max-width: 62em);
+    @import url("ao3/5_site_narrow.handheld_.css") screen and (max-width: 42em);
+    @import url("ao3/6_site_speech_.css") speech;
+    @import url("ao3/7_site_print_.css") print;
 
-  <!-- SCRIPTS -->
+    /* Workskin CSS overrides AO3 base */
+    @import url("css/workskin_orig.css") layer(workskin);
+  </style>
+
   <script src="js/loadComponents.js"></script>
-
 </head>
 
 <body>
@@ -20,8 +27,8 @@
     fetch('test_data/TestProject/output.html')
       .then(response => response.text())
       .then(html => {
-        // Wrap the Ao3 content inside a div with id "workskin"
-        document.getElementById('preview-root').innerHTML = `<div id="workskin">${html}</div>`;
+        // Wrap the content in #work so AO3 CSS applies
+        document.getElementById('preview-root').innerHTML = `<div id="work">${html}</div>`;
       })
       .catch(err => {
         document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';

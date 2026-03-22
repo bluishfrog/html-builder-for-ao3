@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/worksin_2026_blusHTMLBuilder.css">
   
   <style>
-    /* Reset body/html to avoid extra spacing interfering with workskin */
     html, body {
       margin: 0;
       padding: 0;
@@ -18,25 +17,34 @@
     body {
       overflow-x: hidden;
     }
+
+    /* Wrapper to contain floats and negative margins */
+    #preview-root {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      overflow: auto; /* contain floats */
+      padding: 0;
+      margin: 0;
+    }
   </style>
 </head>
 
 <body>
+  <div id="preview-root"></div>
 
   <script>
-    // Fetch output.html and inject it directly into the body
     fetch('test_data/TestProject/output.html')
       .then(response => response.text())
       .then(html => {
-        // Clear body and inject HTML directly
-        document.body.innerHTML = html;
+        // Wrap the Ao3 content inside a div with id "workskin"
+        document.getElementById('preview-root').innerHTML = `<div id="workskin">${html}</div>`;
       })
       .catch(err => {
-        document.body.innerHTML = '<p style="color:red;">Failed to load preview</p>';
+        document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
         console.error(err);
       });
   </script>
-
 </body>
 
 </html>

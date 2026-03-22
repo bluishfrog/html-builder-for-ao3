@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <title>Preview</title>
   <link rel="stylesheet" href="css/worksin_2026_blusHTMLBuilder.css">
-
+  
   <style>
-    /* Reset spacing for the preview so workskin renders like Ao3 */
+    /* Reset body/html to avoid extra spacing interfering with workskin */
     html, body {
       margin: 0;
       padding: 0;
@@ -15,47 +15,28 @@
       height: 100%;
     }
 
-    /* Ensure the root container doesn't interfere */
-    #preview-root {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-    }
-
-    /* Optional: remove extra spacing caused by injected div */
-    #preview-root > #workskin {
-      display: block;
-      margin: 0 auto;
-      padding: 0;
-      width: auto; /* let workskin control its own width */
+    body {
+      overflow-x: hidden;
     }
   </style>
 </head>
 
 <body>
-  <!-- Root container for injected content -->
-  <div id="preview-root"></div>
 
   <script>
-    // Fetch the output.html content
+    // Fetch output.html and inject it directly into the body
     fetch('test_data/TestProject/output.html')
       .then(response => response.text())
       .then(html => {
-        // Inject output inside a wrapper with id="workskin"
-        const wrapper = document.createElement('div');
-        wrapper.id = 'workskin';
-        wrapper.innerHTML = html;
-
-        // Clear preview root and append wrapped content
-        const root = document.getElementById('preview-root');
-        root.innerHTML = '';
-        root.appendChild(wrapper);
+        // Clear body and inject HTML directly
+        document.body.innerHTML = html;
       })
       .catch(err => {
-        document.getElementById('preview-root').innerHTML = '<p style="color:red;">Failed to load preview</p>';
+        document.body.innerHTML = '<p style="color:red;">Failed to load preview</p>';
         console.error(err);
       });
   </script>
+
 </body>
 
 </html>

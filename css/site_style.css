@@ -277,6 +277,7 @@ body {
 }
 
 .preview-plus-button .file-preview {
+    display: flex;
     flex: 1;
     flex-direction: row;
     font-size: 14px;

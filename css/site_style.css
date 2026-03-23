@@ -215,6 +215,10 @@ body {
     flex: 1;
 }
 
+.builder-section-container:last-child {
+    margin-bottom: 0px;
+}
+
 .builder-section {
     margin-top: 0px;
     background-color: #ffffff;
@@ -271,6 +275,7 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.builder-section-container:last-child,
 .card-section:last-child,
 .account-cards-container:last-child {
     margin-bottom: 0px;

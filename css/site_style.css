@@ -281,10 +281,10 @@ body {
     font-size: 0.95em;
     color: #555;
     font-style: italic;
-    
+    padding: 0px 12px;
     background-color: #ffffff;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    margin-bottom: 0px;
+    border-radius: 0px;
     border: 1px solid #d0d0d0;
 }
 

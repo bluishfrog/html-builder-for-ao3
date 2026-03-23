@@ -14,8 +14,12 @@ body {
 
 body a {
     color: #33337C;
+    text-decoration: none;
 }
 
+body a:hover {
+    text-decoration: underline;
+}
 
 /* ---------- Page Layout for Sticky Footer ---------- */
 html,
@@ -285,7 +289,7 @@ body {
     font-size: 14px;
     color: #555;
     font-style: italic;
-    padding: 7px 16px;
+    padding: 6px 16px;
     background-color: #ffffff;
     margin-bottom: 10px;
     border-radius: 4px;

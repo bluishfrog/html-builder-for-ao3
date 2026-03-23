@@ -31,9 +31,12 @@
 
                         <div class="editor-card">
                             <h3>Project Info</h3>
-                            <p>Placeholder</p>
-
-
+                            <p>Select the config file of the project you want to be working in. If you have not setup a
+                                project yet, you can do so <a href="project_settings.html">here</a>.</p>
+                            <div class="file-preview" id="mainFileConfig">No file assigned</div>
+                            <div class="file-actions">
+                                <button onclick="assignMainDocument()">Select Project</button>
+                            </div>
                         </div>
 
                         <div class="editor-card">
@@ -49,7 +52,8 @@
                 <!-- right side of builder, where the preview is -->
                 <div class="builder-section">
                     <h2>Preview</h2>
-                    <iframe id="preview-frame" src="preview.html" style="width:100%; height:100%; border:none;"></iframe>
+                    <iframe id="preview-frame" src="preview.html"
+                        style="width:100%; height:100%; border:none;"></iframe>
                 </div>
 
             </div>

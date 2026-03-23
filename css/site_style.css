@@ -13,7 +13,7 @@ body {
 }
 
 body a {
-    color: #C9F2FF;
+    color: #33337C;
 }
 
 
@@ -277,10 +277,11 @@ body {
 }
 
 .preview-plus-button .file-preview {
+    flex: 1;
     font-size: 0.95em;
     color: #555;
     font-style: italic;
-    padding: 8px 12px;
+    
     background-color: #ffffff;
     margin-bottom: 10px;
     border-radius: 4px;

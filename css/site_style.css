@@ -272,22 +272,20 @@ body {
 .preview-plus-button {
     display: flex;
     gap: 5px;
-    flex-wrap: wrap;
-    flex: 1;
+    align-items: stretch;
 }
 
 .preview-plus-button .file-preview {
     display: flex;
-    flex: 1;
-    flex-direction: row;
+    align-items: center;   /* vertical centering */
+    height: 100%;          /* match parent */
+    padding: 8px 16px;     /* match button padding */
     font-size: 14px;
     color: #555;
     font-style: italic;
-    padding: 8px 16px;
     background-color: #ffffff;
     border-radius: 8px;
     border: 1px solid #d0d0d0;
-    line-height: normal;
 }
 
 /* ---------- Project Settings Layout ---------- */

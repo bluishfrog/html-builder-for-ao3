@@ -279,10 +279,10 @@ body {
 .preview-plus-button .file-preview {
     flex: 1;
     flex-direction: row;
-    font-size: 0.95em;
+    font-size: 14px;
     color: #555;
     font-style: italic;
-    padding: 0px 12px;
+    padding: 8px 16px;
     background-color: #ffffff;
     margin-bottom: 0px;
     border-radius: 0px;

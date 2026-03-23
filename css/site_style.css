@@ -278,7 +278,7 @@ body {
 
 .preview-plus-button .file-preview {
     flex: 1;
-    display: flexbox;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     padding: 8px 14px;

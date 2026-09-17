@@ -17,12 +17,15 @@
 
             <h1>Project Settings</h1>
             <p>
-                Each project is a folder containing all your files. Open an existing project or create a new one. 
+                Each project is a folder containing all your files. Open an existing project or create a new one.
             </p>
 
             <!-- Project Setup -->
             <div class="card-section">
                 <h2>Project Setup</h2>
+                <div class="info_popup" onclick="open_info_popup()">?
+                    <span class="info_popuptext" id="myPopup">Here is an explanation</span>
+                </div>
 
                 <div class="file-preview" id="projectStatus">No project loaded</div>
                 <div class="file-actions">
@@ -108,7 +111,8 @@
                     <!-- Future Card -->
                     <div class="account-card">
                         <h3>Potential Other Platforms</h3>
-                        <p>There's a lot of different formatting types to cover. If you have wishes or want to code your own extension, come talk to me!</p>
+                        <p>There's a lot of different formatting types to cover. If you have wishes or want to code your
+                            own extension, come talk to me!</p>
                     </div>
 
                 </div>
@@ -124,6 +128,14 @@
     </div>
 
     <script src="js/loadComponents.js"></script>
+
+    <script>
+        // When the user clicks on <div>, open the popup
+        function open_info_popup() {
+            var info_popup = document.getElementById("myPopup");
+            info_popup.classList.toggle("show");
+        }
+    </script>
 </body>
 
 </html>
